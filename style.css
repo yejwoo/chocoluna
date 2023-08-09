@@ -1,0 +1,15 @@
+body {
+  padding: 0;
+  background: #eee;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 160px;
+}
+
+canvas {
+  background: #8e8e8e;
+  transform: scale(1.5);
+  image-rendering: pixelated;
+}
+
