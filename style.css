@@ -1,10 +1,23 @@
+@font-face {
+  font-family: minecraft;
+  src: url('Minecraft.ttf');
+}
+
+* {
+  font-family: minecraft;
+}
+
 body {
   padding: 0;
   background: #eee;
+  
+}
+
+.container {
+  margin-top: 120px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 160px;
 }
 
 canvas {
@@ -13,3 +26,6 @@ canvas {
   image-rendering: pixelated;
 }
 
+h1 {
+  text-align: center;
+}

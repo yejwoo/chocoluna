@@ -1,6 +1,7 @@
 const canvas = document.querySelector("canvas");
 const c = canvas.getContext("2d");
 
+
 canvas.width = 32 * 10;
 canvas.height = 32 * 9;
 
@@ -18,22 +19,44 @@ heart.onload = () => {
   c.drawImage(heart, 0, 0, 48, 16, 8, 264, 48, 16);
 };
 
-const donut = new Image();
-donut.src = "img/donut.png";
+const donutSmall = new Image();
+donutSmall.src = "img/donutSmall.png";
 
-donut.onload = () => {
-  c.drawImage(donut, 264, 264, 16, 16);
+donutSmall.onload = () => {
+  c.drawImage(donutSmall, 264, 264, 16, 16);
+};
+
+const donutLarge = new Image();
+donutLarge.src = "img/donutLarge.png";
+
+donutLarge.onload = () => {
+  c.drawImage(donutLarge, 5*32, 5*32);
+};
+
+const slime = new Image();
+slime.src = "img/slime.png";
+
+slime.onload = () => {
+  c.drawImage(slime, 0, 0, 32, 32, 2*32, 1*32, 32, 32);
+};
+
+
+const luna = new Image();
+luna.src = "img/sprite/luna.png";
+
+luna.onload = () => {
+  c.drawImage(luna, 32, 96, 32, 32, 1*32, 7*32, 32, 32);
 };
 
 let donutScore = 0;
 
+const myFont = new FontFace("myFont", "url(Minecraft.ttf)");
 
-var myFont = new FontFace('myFont', 'url(Minecraft.ttf)');
-
-myFont.load().then(function(font){
-
-  c.font = "16px KulminoituvaRegular";
+myFont.load().then((font) => {
+  document.fonts.add(font);
+  console.log("Font loaded");
+  c.font = "16px myFont";
   c.fillStyle = "Black";
-  c.fillText(`x ${donutScore}`, 284, 276);
-
+  c.fillText(`x ${donutScore}`, 284, 277);
 });
+
