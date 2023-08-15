@@ -8,13 +8,12 @@ class Missile extends Objects {
     this.vy = 0;
   }
   update() {
-    // (60fps === 1초) 지나면 생성 후 또 떨어뜨리기;
     this.timer++;
     this.vy = 1;
     
-    // this.position.y += this.vy;
-    // if(this.timer % 2 === 0) 
-    // this.position.y += this.vy;
+    this.position.y += this.vy;
+    if(this.timer % 2 === 0) 
+    this.position.y += this.vy;
   }
 
   draw() {

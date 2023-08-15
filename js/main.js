@@ -2,7 +2,7 @@
 const canvas = document.querySelector("canvas");
 const c = canvas.getContext("2d");
 const tileSize = 32;
-const velocity = 1.2
+const velocity = 1;
 let score = 0;
 
 canvas.width = tileSize * 10;
@@ -59,8 +59,8 @@ const enemy1 = new Enemy({
 const donut = new Objects({
   imgSrc: "img/donutLarge.png",
   position: {
-    x: 5,
-    y: 5,
+    x: 8,
+    y: 4,
   },
 });
 
@@ -73,8 +73,8 @@ const missile = new Missile({
 });
 
 // 5초마다 자동으로 생성 후 배열에 넣기
-let missileArr = [];
-missileArr.push(missile);
+// let missileArr = [];
+// missileArr.push(missile);
 
 
 const life = new Status({
@@ -99,7 +99,8 @@ const donutScore = new Status({
   },
 });
 
-const chunkedMap1 = new chunkMap(map1);
+const cm1 = new chunkMap(map1);
+const chunkedMap1 = cm1.tiles;
 // map1 ~ map5
 
 
@@ -131,11 +132,11 @@ function render() {
   life.draw();
   donutScore.draw();
 
-  chunkedMap1.draw();
+  cm1.draw(); // 이름 고치삼
 
-  missile.update();
-  missile.draw();
-  
+
+
+
   c.fillText(`x ${score}`, 284, 277);
 }
 
