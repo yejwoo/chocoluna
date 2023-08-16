@@ -1,3 +1,5 @@
+// 좌우 누르다보면 멈추는 기능 고치기
+
 let keys = [];
 
 document.addEventListener("keydown", function (e) {
@@ -43,7 +45,7 @@ document.addEventListener("keydown", function (e) {
 
 document.addEventListener("keyup", function (e) {
   keys[e.code] = false;
-  console.log(keys);
+  
 
   switch (e.code) {
     case "ArrowLeft":

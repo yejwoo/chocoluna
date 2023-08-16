@@ -8,12 +8,21 @@ class Missile extends Objects {
     this.vy = 0;
   }
   update() {
-    this.timer++;
     this.vy = 1;
-    
     this.position.y += this.vy;
-    if(this.timer % 2 === 0) 
-    this.position.y += this.vy;
+    this.blockCollisionCheck();
+  }
+
+  blockCollisionCheck() {
+    missiles.forEach((missile, i) => {
+      missileCollisionBlocks1.forEach((missileCollisionBlock) => {
+        if (
+          missile.position.x > missileCollisionBlock.x &&
+          missile.position.y + 16 > missileCollisionBlock.y
+        )
+          missiles.splice(i, 1);
+      });
+    });
   }
 
   draw() {
@@ -22,7 +31,7 @@ class Missile extends Objects {
       this.position.x,
       this.position.y,
       this.width,
-      this.height,
+      this.height
     );
   }
 }

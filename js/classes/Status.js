@@ -9,20 +9,21 @@ class Status extends Objects {
   }
 
   update() {
-    // 충돌하면 하트 이미지 교체
+    this.splitFrames.y++;
+  
   }
 
   draw() {
     c.drawImage(
       this.img,
       0,
-      tileSize/2 * this.splitFrames.y,
+      16 * this.splitFrames.y,
       this.width,
-      tileSize/2,
+      16,
       this.position.x,
       this.position.y,
       this.width,
-      tileSize/2
+      16
     );
   }
   

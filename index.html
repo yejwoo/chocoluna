@@ -1,26 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <h1>CHOCOLUNA</h1>
-  <div class="container">
-    <canvas></canvas>
-  </div>
-  <script src="js/map/data.js"></script>
-  <script src="js/utils.js"></script>
-  <script src="js/map/stage.js"></script>
-  <script src="js/classes/Objects.js"></script>
-  <script src="js/classes/Player.js"></script>
-  <script src="js/classes/Missile.js"></script>
-  <script src="js/classes/Enemy.js"></script>
-  <script src="js/classes/Status.js"></script>
-  <script src="js/classes/chunkMap.js"></script>
-  <script src="js/eventlisteners.js"></script>
-  <script src="js/main.js"></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body oncontextmenu="return false" onselectstart = "return false">
+    <div class="container">
+      <h1>CHOCOLUNA</h1>
+      <div class="text-wrap">
+        <p class="stage">STAGE <span>1</span></p>
+        <p class="score">x <span>0</span></p>
+      </div>
+      <canvas></canvas>
+    </div>
+
+    <script src="js/map/data.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/map/stage.js"></script>
+    <script src="js/classes/Objects.js"></script>
+    <script src="js/classes/Player.js"></script>
+    <script src="js/classes/Missile.js"></script>
+    <script src="js/classes/Enemy.js"></script>
+    <script src="js/classes/Status.js"></script>
+    <script src="js/classes/chunkMap.js"></script>
+    <script src="js/eventlisteners.js"></script>
+    <script src="js/main.js"></script>
+  </body>
 </html>
