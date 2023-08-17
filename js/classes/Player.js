@@ -31,24 +31,24 @@ class Player extends Objects {
 
   //forEach문? for문?
   blockCollisionCheck() {
-    for (let i = 0; i < collisionBlocks1.length; i++) {
+    for (let i = 0; i < collisionBlocks.length; i++) {
       if (
-        collisionBlocks1[i].x + tileSize > this.position.x &&
-        collisionBlocks1[i].x < this.position.x + tileSize &&
-        collisionBlocks1[i].y + tileSize > this.position.y &&
-        collisionBlocks1[i].y < this.position.y + tileSize
+        collisionBlocks[i].x + tileSize > this.position.x &&
+        collisionBlocks[i].x < this.position.x + tileSize &&
+        collisionBlocks[i].y + tileSize > this.position.y &&
+        collisionBlocks[i].y < this.position.y + tileSize
       ) {
         if (this.vx === -velocity)
-          this.position.x = collisionBlocks1[i].x + tileSize;
+          this.position.x = collisionBlocks[i].x + tileSize;
 
         if (this.vx === velocity)
-          this.position.x = collisionBlocks1[i].x - tileSize;
+          this.position.x = collisionBlocks[i].x - tileSize;
 
         if (this.vy === -velocity)
-          this.position.y = collisionBlocks1[i].y + tileSize;
+          this.position.y = collisionBlocks[i].y + tileSize;
 
         if (this.vy === velocity)
-          this.position.y = collisionBlocks1[i].y - tileSize;
+          this.position.y = collisionBlocks[i].y - tileSize;
       }
     }
   }
@@ -56,10 +56,10 @@ class Player extends Objects {
   missileCollisionCheck() {
     missiles.forEach((missile, i) => {
       if (
-        missile.position.x + missile.width - 4 > this.position.x &&
-        missile.position.x + 4 < this.position.x + player.width / 4 &&
-        missile.position.y + missile.height - 4 > this.position.y &&
-        missile.position.y + 4 < this.position.y + player.height
+        missile.position.x + missile.width - 11 > this.position.x &&
+        missile.position.x + 11 < this.position.x + player.width / 4 &&
+        missile.position.y + missile.height - 9 > this.position.y &&
+        missile.position.y + 9 < this.position.y + player.height
       ) {
         life.update();
         missiles.splice(i, 1);
@@ -76,17 +76,21 @@ class Player extends Objects {
         donuts[i].position.y + 16 < this.position.y + tileSize
       ) {
         score++;
+        scoreElement.innerText = score;
         donuts.splice(i, 1);
         break;
       }
     }
-
-    // score를 1 증가시킨 후 더 이상 증가하게 하지 않는다. 수정 필요
   }
 
   getToGoalCheck() {
-    if (this.position.y < chunkedMap1.goal.y + 8)
-      console.log("You got to goal!");
-    // 배경 전환
+    if (this.position.y < 8) {
+      stages[1].clearStage = true;
+      stageNum++;
+      stageElement.innerText = stageNum;
+      gsap.to(overlay, {
+        opacity: 1,
+      });
+    }
   }
 }
