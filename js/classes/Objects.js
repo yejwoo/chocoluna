@@ -9,8 +9,8 @@ class Objects {
     };
 
     this.position = {
-      x: tileSize * position.x,
-      y: tileSize * position.y,
+      x: tile * position.x,
+      y: tile * position.y,
     };
 
     this.frame = 0;
@@ -27,14 +27,14 @@ class Objects {
   draw() {
     c.drawImage(
       this.img,
-      tileSize * this.frame,
+      tile * this.frame,
       0,
-      tileSize,
-      tileSize,
+      tile,
+      tile,
       this.position.x,
       this.position.y,
-      tileSize,
-      tileSize
+      tile,
+      tile
     );
   }
 }

@@ -15,12 +15,12 @@ class Missile extends Objects {
 
   blockCollisionCheck() {
     missiles.forEach((missile, i) => {
-      if(missile.position.x + 11 > missileCollisionBlocks.position.x &&
-        missile.position.y + 23 > missileCollisionBlocks.position.y ) {
-          missiles.splice(i, 1);
-        }
-    })
-
+      if (
+        missile.position.x + 11 > missileCollisionBlocks.position.x &&
+        missile.position.y + 23 > missileCollisionBlocks.position.y
+      )
+        missiles.splice(i, 1);
+    });
   }
 
   draw() {
