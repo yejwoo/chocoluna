@@ -14,6 +14,8 @@ const stageElement = document.querySelector(".stage span");
 let score = parseInt(scoreElement.innerText);
 let stageNum = parseInt(stageElement.innerText);
 
+
+
 let backgroundStage,
   goal,
   player,
@@ -35,7 +37,6 @@ let backgroundStage,
   missile,
   missiles = [],
   missileCollisionBlocks,
-  enemyCollisionBlocks,
   collisionBlocks;
 
 let stages = {
@@ -94,26 +95,28 @@ let stages = {
         },
       });
 
-      (enemy = new Enemy({
+      enemy = new Enemy({
         imgSrc: "img/sprite/slime1.png",
         position: {
           x: 2,
           y: 1,
         },
-      })),
-        (donut = new Objects({
+      }),
+      
+      enemies.push(enemy)  
+      
+      donut = new Objects({
           imgSrc: "img/donut_L.png",
           position: {
             x: 8,
             y: 4,
           },
-        })),
-        enemies.push(enemy);
+      }),
       donuts.push(donut);
 
       collisionBlocks = map1.chunk();
 
-      function missile() {
+      function missile() {      
         if (stageNum === 1) {
           requestAnimationFrame(missile);
           if (timer % 80 === 0) {
@@ -136,11 +139,12 @@ let stages = {
   2: {
     clearStage: false,
     init: () => {
-      (missiles = []),
-        (enemies = []),
-        (backgroundStage = new Stage({
+      missiles = [],
+      enemies = [],
+
+      backgroundStage = new Stage({
           imgSrc: "img/map/stage2.png",
-        }));
+      });
 
       goal = {
         position: {
@@ -156,26 +160,24 @@ let stages = {
         },
       };
 
-      enemyCollisionBlocks = {
-        rotate: {
-          0 : {
-            x: tile * 7,
-            y: tile * 5,
-          },
-          1 : {
-            x: tile * 5,
-            y: tile * 5,
-          },
-          2: {
-            x: tile * 5,
-            y: tile * 2,
-          },
-          3: {
-            x: tile * 7,
-            y: tile * 2,
-          },
-        }
-      };
+      enemyCollisionBlocks = [
+        {
+          x: tile * 7,
+          y: tile * 5,
+        },
+        {
+          x: tile * 5,
+          y: tile * 5,
+        },
+        {
+          x: tile * 5,
+          y: tile * 2,
+        },
+        {
+          x: tile * 7,
+          y: tile * 2,
+        },
+      ];
 
       player = new Player({
         imgSrc: "img/sprite/idle_down.png",
@@ -217,18 +219,17 @@ let stages = {
           x: 7,
           y: 3,
         },
-        moveDirection: "true",
+        isMove: true,
       });
 
-      (enemy2 = new Enemy({
+      enemy2 = new Enemy({
         imgSrc: "img/sprite/slime2.png",
         position: {
           x: 0,
           y: 5,
         },
+        isMove: false,
       })),
-
-
         (donut = new Objects({
           imgSrc: "img/donut_L.png",
           position: {
@@ -254,18 +255,19 @@ let stages = {
               direction: "horizontal",
             });
             missiles.push(missile);
+            
           } else cancelAnimationFrame(missile);
         }
       }
-
+      
       missile();
     },
   },
   3: {
     clearStage: false,
     init: () => {
-      (missiles = []),
-        (enemies = []),
+      missiles = [],
+      enemies = [],
         (backgroundStage = new Stage({
           imgSrc: "img/map/stage3.png",
         }));
@@ -372,20 +374,18 @@ let stages = {
       (enemy2 = new Enemy({
         imgSrc: "img/sprite/slime2.png",
         position: {
-          x: 8,
-          y: 7,
-        },
-        moveDirection: "vertical",
-      })),
-      (enemy3 = new Enemy({
-        imgSrc: "img/sprite/slime3.png",
-        position: {
           x: 5,
           y: 5,
         },
-        moveDirection: "rotate",
+        moveDirection: "vertical",
       })),
-        
+        (enemy3 = new Enemy({
+          imgSrc: "img/sprite/slime3.png",
+          position: {
+            x: 8,
+            y: 7,
+          },
+        })),
         (donut = new Objects({
           imgSrc: "img/donut_L.png",
           position: {
@@ -407,8 +407,9 @@ let stages = {
             y: 0,
           },
         })),
-        enemies.push(enemy, enemy2, enemy3);
-      donuts.push(donutPlusLife, donutMinusLife, donut);
+        donuts.push(donutPlusLife);
+      donuts.push(donutMinusLife);
+      donuts.push(donut);
 
       collisionBlocks = map3.chunk();
     },
@@ -416,8 +417,8 @@ let stages = {
   4: {
     clearStage: false,
     init: () => {
-      (missiles = []),
-        (enemies = []),
+      missiles = [],
+      enemies = [],
         (backgroundStage = new Stage({
           imgSrc: "img/map/stage4.png",
         }));
@@ -549,16 +550,13 @@ let stages = {
             y: 6,
           },
         })),
-        enemies.push(enemy, enemy2, enemy3, enemy4);
-      donuts.push(
-        donutMinusLife,
-        donutMinusLife2,
-        donutMinusLife3,
-        donutMinusLife4,
-        donutMinusLife5,
-        donutMinusLife6,
-        donut
-      );
+        donuts.push(donutMinusLife);
+      donuts.push(donutMinusLife2);
+      donuts.push(donutMinusLife3);
+      donuts.push(donutMinusLife4);
+      donuts.push(donutMinusLife5);
+      donuts.push(donutMinusLife6);
+      donuts.push(donut);
 
       collisionBlocks = map4.chunk();
     },
@@ -566,8 +564,8 @@ let stages = {
   5: {
     clearStage: false,
     init: () => {
-      (missiles = []),
-        (enemies = []),
+      missiles = [],
+      enemies = [],
         (backgroundStage = new Stage({
           imgSrc: "img/map/stage5.png",
         }));
@@ -685,8 +683,10 @@ let stages = {
             y: 5,
           },
         })),
-        enemies.push(enemy, enemy2, enemy3, enemy4, enemy5);
-      donuts.push(donutPlusLife, donutMinusLife, donutMinusLife2, donut);
+        donuts.push(donutPlusLife);
+      donuts.push(donutMinusLife);
+      donuts.push(donutMinusLife2);
+      donuts.push(donut);
 
       collisionBlocks = map5.chunk();
     },
@@ -748,9 +748,10 @@ function render() {
       missile.update();
       missile.draw();
     });
-
+    
     player.update();
     player.draw();
+
 
     life.draw();
     donutScore.draw();

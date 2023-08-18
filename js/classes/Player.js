@@ -29,7 +29,8 @@ class Player {
   switchSprite(name) {
     this.img = this.animations[name].img;
   }
-  update() {
+  update() { 
+    
     this.timer++;
     if (this.timer % 13 === 0) this.frame++;
     if (this.frame > 3) this.frame = 0;
@@ -37,7 +38,7 @@ class Player {
       this.position.y = 0;
       this.vy = 0;
     }
-    if (this.position.y > 227) {
+    if(this.position.y > 227) {
       this.position.y = 227;
     }
 
@@ -48,7 +49,9 @@ class Player {
     this.missileCollisionCheck();
     this.getScoreCheck();
     this.getToGoalCheck();
+
   }
+
 
   blockCollisionCheck() {
     collisionBlocks.forEach((col, colIdx) => {
@@ -74,26 +77,15 @@ class Player {
 
   missileCollisionCheck() {
     missiles.forEach((missile, i) => {
-      
-    if (missile.direction === "vertical" &&
-    missile.position.x + missile.width - 11 > this.position.x &&
-    missile.position.x + 11 < this.position.x + player.width / 4 &&
-    missile.position.y + missile.height - 9 > this.position.y &&
-    missile.position.y + 9 < this.position.y + player.height
-    )
-    {
-      life.update();
-      missiles.splice(i, 1);
-    }
-    else if (missile.direction === "horizontal" &&
-    missile.position.x + missile.width - 9 > this.position.x &&
-    missile.position.x + 9 < this.position.x + player.width / 4 &&
-    missile.position.y + missile.height - 11 > this.position.y &&
-    missile.position.y + 11 < this.position.y + player.height
-    )  {
-      life.update();
-      missiles.splice(i, 1);
-    }
+      if (
+        missile.position.x + missile.width - 11 > this.position.x &&
+        missile.position.x + 11 < this.position.x + player.width / 4 &&
+        missile.position.y + missile.height - 9 > this.position.y &&
+        missile.position.y + 9 < this.position.y + player.height
+      ) {
+        life.update();
+        missiles.splice(i, 1);
+      }
     });
   }
 

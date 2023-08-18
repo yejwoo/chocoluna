@@ -1,10 +1,9 @@
 class Enemy extends Objects {
-  constructor({ imgSrc, position, moveDirection }) {
+  constructor({ imgSrc, position, isMove }) {
     super({ imgSrc, position });
     this.vx = 0;
     this.vy = 0;
-    this.moveDirection = moveDirection;
-    // width 수정
+    this.isMove = isMove;
   }
 
   update() {
@@ -13,69 +12,49 @@ class Enemy extends Objects {
     if (this.timer % 13 === 0) this.frame++;
     if (this.frame > 3) this.frame = 0;
 
-    if (this.moveDirection) {
+    if (this.isMove) {
       this.moveRotation();
-      this.moveVertical();
-      this.moveHorizontal();
-      this.collisionCheck();
     }
-    
   }
 
-  moveVertical() {
-    if (
-      this.position.y >= enemyCollisionBlocks.rotate[0].y &&
-      this.position.y + this.height < enemyCollisionBlocks.rotate[1].y
-    ) {
-      this.vy = velocity;
-      this.position.y += this.vy;
-    }
-    if (
-      this.position.y + this.height <= enemyCollisionBlocks.rotate[1].y &&
-      this.position.y > enemyCollisionBlocks.rotate[0].y
-    ) {
-      this.vy = -velocity;
-      this.position.y += this.vy;
-    }
-  }
+  moveVertical() {}
 
   moveHorizontal() {}
 
-  moveRotation() {    
+  moveRotation() {
     if (
-      this.position.x === enemyCollisionBlocks.rotate[3].x &&
-      this.position.y >= enemyCollisionBlocks.rotate[0].y + tile &&
-      this.position.y + this.height < enemyCollisionBlocks.rotate[0].y
+      this.position.x === enemyCollisionBlocks[3].x &&
+      this.position.y >= enemyCollisionBlocks[3].y + tile &&
+      this.position.y + this.height < enemyCollisionBlocks[0].y
     ) {
-      this.vy = velocity;
+      this.vy = 1;
       this.position.y += this.vy;
     }
 
     if (
-      this.position.y + this.height === enemyCollisionBlocks.rotate[0].y &&
-      this.position.x + this.width / 4 <=
-        enemyCollisionBlocks.rotate[0].x + tile &&
-      this.position.x > enemyCollisionBlocks.rotate[1].x
+      this.position.y + this.height === enemyCollisionBlocks[0].y &&
+      this.position.x + this.width / 4 <= enemyCollisionBlocks[0].x + tile &&
+      this.position.x > enemyCollisionBlocks[1].x
     ) {
-      this.vx = -velocity;
+      this.vx = -1;
       this.position.x += this.vx;
     }
 
     if (
-      this.position.x === enemyCollisionBlocks.rotate[1].x &&
-      this.position.y + this.height <= enemyCollisionBlocks.rotate[1].y &&
-      this.position.y > enemyCollisionBlocks.rotate[2].y + tile
+      this.position.x === enemyCollisionBlocks[1].x &&
+      this.position.y + this.height <= enemyCollisionBlocks[1].y &&
+      this.position.y > enemyCollisionBlocks[2].y + tile
     ) {
-      this.vy = -velocity;
+      this.vy = -1;
       this.position.y += this.vy;
     }
 
     if (
-      this.position.y === enemyCollisionBlocks.rotate[2].y + tile &&
-      this.position.x >= enemyCollisionBlocks.rotate[2].x &&
-      this.position.x + this.width / 4 < enemyCollisionBlocks.rotate[3].x + tile
+      this.position.y === enemyCollisionBlocks[2].y + tile &&
+      this.position.x >= enemyCollisionBlocks[2].x &&
+      this.position.x + this.width / 4 < enemyCollisionBlocks[3].x + tile
     ) {
-      this.vx = velocity;
+      this.vx = 1;
       this.position.x += this.vx;
     }
   }

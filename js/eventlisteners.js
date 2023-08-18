@@ -1,6 +1,5 @@
 let keys = {}
 
-// 키보드 동시 입력 방지 다시!
 document.addEventListener("keydown", function (e) {
   e.preventDefault();
   keys[e.code] = true;
