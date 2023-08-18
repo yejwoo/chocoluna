@@ -156,24 +156,26 @@ let stages = {
         },
       };
 
-      enemyCollisionBlocks = [
-        {
-          x: tile * 7,
-          y: tile * 5,
-        },
-        {
-          x: tile * 5,
-          y: tile * 5,
-        },
-        {
-          x: tile * 5,
-          y: tile * 2,
-        },
-        {
-          x: tile * 7,
-          y: tile * 2,
-        },
-      ];
+      enemyCollisionBlocks = {
+        rotate: {
+          0 : {
+            x: tile * 7,
+            y: tile * 5,
+          },
+          1 : {
+            x: tile * 5,
+            y: tile * 5,
+          },
+          2: {
+            x: tile * 5,
+            y: tile * 2,
+          },
+          3: {
+            x: tile * 7,
+            y: tile * 2,
+          },
+        }
+      };
 
       player = new Player({
         imgSrc: "img/sprite/idle_down.png",
@@ -215,7 +217,7 @@ let stages = {
           x: 7,
           y: 3,
         },
-        isMove: true,
+        moveDirection: "true",
       });
 
       (enemy2 = new Enemy({
@@ -224,8 +226,9 @@ let stages = {
           x: 0,
           y: 5,
         },
-        isMove: false,
       })),
+
+
         (donut = new Objects({
           imgSrc: "img/donut_L.png",
           position: {
@@ -281,6 +284,49 @@ let stages = {
         },
       };
 
+      enemyCollisionBlocks = {
+        rotate: {
+          0 : {
+            x: tile * 5,
+            y: tile * 7,
+          },
+          1 : {
+            x: tile * 3,
+            y: tile * 7,
+          },
+          2 : {
+            x: tile * 3,
+            y: tile * 4,
+          },
+          3 : {
+            x: tile * 5,
+            y: tile * 4,
+          },
+        },
+        vertical: {
+          blocks : {
+            0: {
+              x: 0,
+              y: 0,
+            },
+            1: {
+              x: 0,
+              y: tile * 4,
+            }
+          },
+          blocks2 : {
+            0: {
+              x: tile * 8,
+              y: 0,
+            },
+            1: {
+              x: tile * 8,
+              y: tile * 7,
+            }
+          },
+        }
+      };
+
       player = new Player({
         imgSrc: "img/sprite/idle_down.png",
         position: {
@@ -321,22 +367,25 @@ let stages = {
           x: 0,
           y: 0,
         },
+        moveDirection: "vertical",
       });
-
       (enemy2 = new Enemy({
         imgSrc: "img/sprite/slime2.png",
+        position: {
+          x: 8,
+          y: 7,
+        },
+        moveDirection: "vertical",
+      })),
+      (enemy3 = new Enemy({
+        imgSrc: "img/sprite/slime3.png",
         position: {
           x: 5,
           y: 5,
         },
+        moveDirection: "rotate",
       })),
-        (enemy3 = new Enemy({
-          imgSrc: "img/sprite/slime3.png",
-          position: {
-            x: 8,
-            y: 7,
-          },
-        })),
+        
         (donut = new Objects({
           imgSrc: "img/donut_L.png",
           position: {
