@@ -1,6 +1,6 @@
 class Status extends Objects {
   constructor({ imgSrc, position, splitFrames }) {
-    super({imgSrc, position})
+    super({ imgSrc, position });
     this.splitFrames = splitFrames;
     this.position = {
       x: position.x,
@@ -10,7 +10,6 @@ class Status extends Objects {
 
   update() {
     this.splitFrames.y++;
-  
   }
 
   draw() {
@@ -26,5 +25,4 @@ class Status extends Objects {
       16
     );
   }
-  
 }
