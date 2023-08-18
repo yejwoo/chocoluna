@@ -1,9 +1,23 @@
-class Player extends Objects {
+class Player {
   constructor({ imgSrc, position, animations }) {
-    super({ imgSrc, position });
+    this.img = new Image();
+    this.img.src = imgSrc;
+    this.img.onload = () => {
+      this.draw();
+      this.width = this.img.width;
+      this.height = this.img.height;
+    };
+
+    this.position = {
+      x: position.x,
+      y: position.y,
+    };
+
     this.vx = 0;
     this.vy = 0;
     this.animations = animations;
+    this.timer = 0;
+    this.frame = 0;
 
     for (let key in this.animations) {
       const img = new Image();
@@ -15,13 +29,17 @@ class Player extends Objects {
   switchSprite(name) {
     this.img = this.animations[name].img;
   }
-  update() {
+  update() { 
+    
     this.timer++;
     if (this.timer % 13 === 0) this.frame++;
     if (this.frame > 3) this.frame = 0;
     if (this.position.y < 0) {
       this.position.y = 0;
       this.vy = 0;
+    }
+    if(this.position.y > 227) {
+      this.position.y = 227;
     }
 
     this.position.x += this.vx;
@@ -31,7 +49,9 @@ class Player extends Objects {
     this.missileCollisionCheck();
     this.getScoreCheck();
     this.getToGoalCheck();
+
   }
+
 
   blockCollisionCheck() {
     collisionBlocks.forEach((col, colIdx) => {
@@ -40,15 +60,15 @@ class Player extends Objects {
           const blockX = rowIdx * tile;
           const blockY = colIdx * tile;
           if (
-            blockX + tile > this.position.x &&
-            blockX < this.position.x + tile &&
-            blockY + tile > this.position.y &&
-            blockY < this.position.y + tile
+            blockX + 24 > this.position.x &&
+            blockX < this.position.x + 24 &&
+            blockY + 24 > this.position.y &&
+            blockY < this.position.y + 24
           ) {
-            if (this.vx === -velocity) this.position.x = blockX + tile;
-            if (this.vx === velocity) this.position.x = blockX - tile;
-            if (this.vy === -velocity) this.position.y = blockY + tile;
-            if (this.vy === velocity) this.position.y = blockY - tile;
+            if (this.vx === -velocity) this.position.x = blockX + 24;
+            else if (this.vx === velocity) this.position.x = blockX - 24;
+            else if (this.vy === -velocity) this.position.y = blockY + 24;
+            else if (this.vy === velocity) this.position.y = blockY - 24;
           }
         }
       });
@@ -87,8 +107,9 @@ class Player extends Objects {
 
   getToGoalCheck() {
     if (
-      goal.position.x === this.position.x &&
-      goal.position.y + 8 > this.position.y &&
+      goal.position.x - 8 <= this.position.x &&
+      goal.position.x + tile >= this.position.x + 24 &&
+      goal.position.y + 16 >= this.position.y &&
       score === stageNum
     ) {
       stageNum++;
@@ -100,9 +121,24 @@ class Player extends Objects {
           stages[stageNum].init();
           gsap.to(overlay, {
             opacity: 0,
-          })
+          });
         },
       });
     }
+  }
+
+  draw() {
+    // 크기 24px, 좌측 -8 우측 +8
+    c.drawImage(
+      this.img,
+      24 * this.frame,
+      0,
+      24,
+      24,
+      this.position.x + 4,
+      this.position.y + 4,
+      24,
+      24
+    );
   }
 }
