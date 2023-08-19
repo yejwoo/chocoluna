@@ -1,10 +1,10 @@
 class Player {
-  constructor({ imgSrc, position, animations }) {
+  constructor({ imgSrc, position, animations, enemyCollisionPosition }) {
     this.img = new Image();
     this.img.src = imgSrc;
     this.img.onload = () => {
       this.draw();
-      this.width = this.img.width;
+      this.width = this.img.width / 4;
       this.height = this.img.height;
     };
 
@@ -15,9 +15,10 @@ class Player {
 
     this.vx = 0;
     this.vy = 0;
-    this.animations = animations;
     this.timer = 0;
     this.frame = 0;
+    this.animations = animations;
+    this.enemyCollisionPosition = enemyCollisionPosition;
 
     for (let key in this.animations) {
       const img = new Image();
@@ -29,8 +30,8 @@ class Player {
   switchSprite(name) {
     this.img = this.animations[name].img;
   }
-  update() { 
-    
+
+  update() {
     this.timer++;
     if (this.timer % 13 === 0) this.frame++;
     if (this.frame > 3) this.frame = 0;
@@ -38,8 +39,14 @@ class Player {
       this.position.y = 0;
       this.vy = 0;
     }
-    if(this.position.y > 227) {
+    if (this.position.y > 227) {
       this.position.y = 227;
+    }
+    if (this.position.x < -8) {
+      this.position.x = -8;
+    }
+    if (this.position.x > canvas.width - this.width) {
+      this.position.x = canvas.width - this.width;
     }
 
     this.position.x += this.vx;
@@ -49,9 +56,7 @@ class Player {
     this.missileCollisionCheck();
     this.getScoreCheck();
     this.getToGoalCheck();
-
   }
-
 
   blockCollisionCheck() {
     collisionBlocks.forEach((col, colIdx) => {
@@ -79,9 +84,9 @@ class Player {
     missiles.forEach((missile, i) => {
       if (
         missile.position.x + missile.width - 11 > this.position.x &&
-        missile.position.x + 11 < this.position.x + player.width / 4 &&
+        missile.position.x + 11 < this.position.x + this.width &&
         missile.position.y + missile.height - 9 > this.position.y &&
-        missile.position.y + 9 < this.position.y + player.height
+        missile.position.y + 9 < this.position.y + this.height
       ) {
         life.update();
         missiles.splice(i, 1);

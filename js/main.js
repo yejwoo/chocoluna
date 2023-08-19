@@ -14,8 +14,7 @@ const stageElement = document.querySelector(".stage span");
 let score = parseInt(scoreElement.innerText);
 let stageNum = parseInt(stageElement.innerText);
 
-
-
+// 중복 전역변수 해결하기
 let backgroundStage,
   goal,
   player,
@@ -39,6 +38,7 @@ let backgroundStage,
   missileCollisionBlocks,
   collisionBlocks;
 
+// 마무리 단계 -> stages를 class로 변경하기?
 let stages = {
   1: {
     clearStage: false,
@@ -95,28 +95,32 @@ let stages = {
         },
       });
 
-      enemy = new Enemy({
+      (enemy = new Enemy({
         imgSrc: "img/sprite/slime1.png",
         position: {
           x: 2,
           y: 1,
         },
-      }),
-      
-      enemies.push(enemy)  
-      
-      donut = new Objects({
-          imgSrc: "img/donut_L.png",
-          position: {
-            x: 8,
-            y: 4,
-          },
-      }),
-      donuts.push(donut);
+        moveDirection: {
+          rotate: false,
+          vertical: false,
+          horizontal: false,
+        },
+      })),
+        enemies.push(enemy);
+
+      (donut = new Objects({
+        imgSrc: "img/donut_L.png",
+        position: {
+          x: 8,
+          y: 4,
+        },
+      })),
+        donuts.push(donut);
 
       collisionBlocks = map1.chunk();
 
-      function missile() {      
+      function missile() {
         if (stageNum === 1) {
           requestAnimationFrame(missile);
           if (timer % 80 === 0) {
@@ -139,12 +143,11 @@ let stages = {
   2: {
     clearStage: false,
     init: () => {
-      missiles = [],
-      enemies = [],
-
-      backgroundStage = new Stage({
+      (missiles = []),
+        (enemies = []),
+        (backgroundStage = new Stage({
           imgSrc: "img/map/stage2.png",
-      });
+        }));
 
       goal = {
         position: {
@@ -160,24 +163,26 @@ let stages = {
         },
       };
 
-      enemyCollisionBlocks = [
-        {
-          x: tile * 7,
-          y: tile * 5,
+      enemyCollisionBlocks = {
+        rotate: {
+          0: {
+            x: 7 * tile,
+            y: 5 * tile,
+          },
+          1: {
+            x: 5 * tile,
+            y: 5 * tile,
+          },
+          2: {
+            x: 5 * tile,
+            y: 2 * tile,
+          },
+          3: {
+            x: 7 * tile,
+            y: 2 * tile,
+          },
         },
-        {
-          x: tile * 5,
-          y: tile * 5,
-        },
-        {
-          x: tile * 5,
-          y: tile * 2,
-        },
-        {
-          x: tile * 7,
-          y: tile * 2,
-        },
-      ];
+      };
 
       player = new Player({
         imgSrc: "img/sprite/idle_down.png",
@@ -211,6 +216,10 @@ let stages = {
             imgSrc: "img/sprite/walk_down.png",
           },
         },
+        enemyCollisionPosition: {
+          x: 8 * tile + 4,
+          y: 4 * tile,
+        },
       });
 
       enemy = new Enemy({
@@ -219,16 +228,24 @@ let stages = {
           x: 7,
           y: 3,
         },
-        isMove: true,
+        moveDirection: {
+          rotate: true,
+          vertical: false,
+          horizontal: false,
+        },
       });
 
-      enemy2 = new Enemy({
+      (enemy2 = new Enemy({
         imgSrc: "img/sprite/slime2.png",
         position: {
           x: 0,
           y: 5,
         },
-        isMove: false,
+        moveDirection: {
+          rotate: false,
+          vertical: false,
+          horizontal: false,
+        },
       })),
         (donut = new Objects({
           imgSrc: "img/donut_L.png",
@@ -255,19 +272,18 @@ let stages = {
               direction: "horizontal",
             });
             missiles.push(missile);
-            
           } else cancelAnimationFrame(missile);
         }
       }
-      
+
       missile();
     },
   },
   3: {
     clearStage: false,
     init: () => {
-      missiles = [],
-      enemies = [],
+      (missiles = []),
+        (enemies = []),
         (backgroundStage = new Stage({
           imgSrc: "img/map/stage3.png",
         }));
@@ -281,52 +297,40 @@ let stages = {
 
       missileCollisionBlocks = {
         position: {
-          x: 2 * tile,
-          y: 5 * tile,
+          x: 0,
+          y: 4 * tile,
         },
       };
 
       enemyCollisionBlocks = {
         rotate: {
-          0 : {
+          0: {
             x: tile * 5,
             y: tile * 7,
           },
-          1 : {
+          1: {
             x: tile * 3,
             y: tile * 7,
           },
-          2 : {
+          2: {
             x: tile * 3,
             y: tile * 4,
           },
-          3 : {
+          3: {
             x: tile * 5,
             y: tile * 4,
           },
         },
         vertical: {
-          blocks : {
             0: {
-              x: 0,
+              x: 8 * tile,
               y: 0,
             },
             1: {
-              x: 0,
-              y: tile * 4,
-            }
-          },
-          blocks2 : {
-            0: {
-              x: tile * 8,
-              y: 0,
+              x: 8 * tile,
+              y: 7 * tile,
             },
-            1: {
-              x: tile * 8,
-              y: tile * 7,
-            }
-          },
-        }
+        },
       };
 
       player = new Player({
@@ -361,31 +365,49 @@ let stages = {
             imgSrc: "img/sprite/walk_down.png",
           },
         },
+        enemyCollisionPosition: {
+          x: 2 * tile - 4,
+          y: 6 * tile,
+        },
       });
 
-      enemy = new Enemy({
-        imgSrc: "img/sprite/slime1.png",
-        position: {
-          x: 0,
-          y: 0,
-        },
-        moveDirection: "vertical",
-      });
-      (enemy2 = new Enemy({
+      
+      (enemy = new Enemy({
         imgSrc: "img/sprite/slime2.png",
         position: {
           x: 5,
           y: 5,
         },
-        moveDirection: "vertical",
+        moveDirection: {
+          rotate: true,
+          vertical: false,
+          horizontal: false,
+        },
       })),
-        (enemy3 = new Enemy({
+        (enemy2 = new Enemy({
           imgSrc: "img/sprite/slime3.png",
           position: {
             x: 8,
             y: 7,
           },
+          moveDirection: {
+            rotate: false,
+            vertical: true,
+            horizontal: false,
+          },
         })),
+        enemy3 = new Enemy({
+          imgSrc: "img/sprite/slime1.png",
+          position: {
+            x: 0,
+            y: 0,
+          },
+          moveDirection: {
+            rotate: false,
+            vertical: false,
+            horizontal: false,
+          },
+        });
         (donut = new Objects({
           imgSrc: "img/donut_L.png",
           position: {
@@ -407,18 +429,37 @@ let stages = {
             y: 0,
           },
         })),
-        donuts.push(donutPlusLife);
-      donuts.push(donutMinusLife);
-      donuts.push(donut);
+      enemies.push(enemy, enemy2, enemy3);
+      donuts.push(donutPlusLife, donutMinusLife, donut);
 
       collisionBlocks = map3.chunk();
+
+      // 3초간 기다리기 나중에 추가
+      function missile() {
+        if (stageNum === 3) {
+          requestAnimationFrame(missile);
+          if (timer % 200 === 0) {
+            const missile = new Missile({
+              imgSrc: "img/missile_vertical.png",
+              position: {
+                x: 0,
+                y: 16,
+              },
+              direction: "vertical",
+            });
+            missiles.push(missile);
+          } else cancelAnimationFrame(missile);
+        }
+      }
+
+      missile();
     },
   },
   4: {
     clearStage: false,
     init: () => {
-      missiles = [],
-      enemies = [],
+      (missiles = []),
+        (enemies = []),
         (backgroundStage = new Stage({
           imgSrc: "img/map/stage4.png",
         }));
@@ -434,6 +475,27 @@ let stages = {
         position: {
           x: 2 * tile,
           y: 5 * tile,
+        },
+      };
+
+      enemyCollisionBlocks = {
+        rotate: {
+          0: {
+            x: tile * 5,
+            y: tile * 4,
+          },
+          1: {
+            x: tile * 3,
+            y: tile * 4,
+          },
+          2: {
+            x: tile * 3,
+            y: tile * 1,
+          },
+          3: {
+            x: tile * 5,
+            y: tile * 1,
+          },
         },
       };
 
@@ -477,13 +539,23 @@ let stages = {
           x: 1,
           y: 6,
         },
+        moveDirection: {
+          rotate: false,
+          vertical: false,
+          horizontal: false,
+        },
       });
 
       (enemy2 = new Enemy({
         imgSrc: "img/sprite/slime2.png",
         position: {
-          x: 3,
+          x: 5,
           y: 2,
+        },
+        moveDirection: {
+          rotate: true,
+          vertical: false,
+          horizontal: false,
         },
       })),
         (enemy3 = new Enemy({
@@ -492,6 +564,11 @@ let stages = {
             x: 9,
             y: 7,
           },
+          moveDirection: {
+            rotate: false,
+            vertical: false,
+            horizontal: false,
+          },
         })),
         (enemy4 = new Enemy({
           imgSrc: "img/sprite/slime1.png",
@@ -499,13 +576,18 @@ let stages = {
             x: 2,
             y: 0,
           },
+          moveDirection: {
+            rotate: false,
+            vertical: false,
+            horizontal: false,
+          },
         }));
 
       (donut = new Objects({
         imgSrc: "img/donut_L.png",
         position: {
           x: 4,
-          y: 3,
+          y: 4,
         },
       })),
         (donutMinusLife = new Objects({
@@ -550,13 +632,16 @@ let stages = {
             y: 6,
           },
         })),
-        donuts.push(donutMinusLife);
-      donuts.push(donutMinusLife2);
-      donuts.push(donutMinusLife3);
-      donuts.push(donutMinusLife4);
-      donuts.push(donutMinusLife5);
-      donuts.push(donutMinusLife6);
-      donuts.push(donut);
+        donuts.push(
+          donutMinusLife,
+          donutMinusLife2,
+          donutMinusLife3,
+          donutMinusLife4,
+          donutMinusLife5,
+          donutMinusLife6,
+          donut
+        );
+      enemies.push(enemy, enemy2, enemy3, enemy4);
 
       collisionBlocks = map4.chunk();
     },
@@ -564,8 +649,8 @@ let stages = {
   5: {
     clearStage: false,
     init: () => {
-      missiles = [],
-      enemies = [],
+      (missiles = []),
+        (enemies = []),
         (backgroundStage = new Stage({
           imgSrc: "img/map/stage5.png",
         }));
@@ -624,6 +709,11 @@ let stages = {
           x: 7,
           y: 6,
         },
+        moveDirection: {
+          rotate: false,
+          vertical: false,
+          horizontal: false,
+        },
       });
 
       (enemy2 = new Enemy({
@@ -632,12 +722,22 @@ let stages = {
           x: 7,
           y: 4,
         },
+        moveDirection: {
+          rotate: false,
+          vertical: false,
+          horizontal: false,
+        },
       })),
         (enemy3 = new Enemy({
           imgSrc: "img/sprite/slime3.png",
           position: {
             x: 0,
             y: 1,
+          },
+          moveDirection: {
+            rotate: false,
+            vertical: false,
+            horizontal: false,
           },
         })),
         (enemy4 = new Enemy({
@@ -646,6 +746,11 @@ let stages = {
             x: 3,
             y: 6,
           },
+          moveDirection: {
+            rotate: false,
+            vertical: false,
+            horizontal: false,
+          },
         }));
 
       (enemy5 = new Enemy({
@@ -653,6 +758,11 @@ let stages = {
         position: {
           x: 1,
           y: 6,
+        },
+        moveDirection: {
+          rotate: false,
+          vertical: false,
+          horizontal: false,
         },
       })),
         (donut = new Objects({
@@ -683,16 +793,15 @@ let stages = {
             y: 5,
           },
         })),
-        donuts.push(donutPlusLife);
-      donuts.push(donutMinusLife);
-      donuts.push(donutMinusLife2);
-      donuts.push(donut);
+        donuts.push(donutPlusLife, donutMinusLife, donutMinusLife2, donut);
+      enemies.push(enemy, enemy2, enemy3, enemy4, enemy5);
 
       collisionBlocks = map5.chunk();
     },
   },
 };
 
+// 이렇게 말고 하트 하나 따로 두고 세 개씩 배치하기?
 const life = new Status({
   imgSrc: "img/heart.png",
   position: {
@@ -748,10 +857,9 @@ function render() {
       missile.update();
       missile.draw();
     });
-    
+
     player.update();
     player.draw();
-
 
     life.draw();
     donutScore.draw();
