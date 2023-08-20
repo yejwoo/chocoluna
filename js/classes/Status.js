@@ -10,7 +10,6 @@ class Status extends Objects {
 
   update() {
     this.splitFrames.y++;
-  
   }
 
   draw() {

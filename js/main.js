@@ -27,10 +27,6 @@ let backgroundStage,
   donut,
   donutMinusLife,
   donutMinusLife2,
-  donutMinusLife3,
-  donutMinusLife4,
-  donutMinusLife5,
-  donutMinusLife6,
   donutPlusLife,
   donuts = [],
   missile,
@@ -49,23 +45,25 @@ let stages = {
 
       goal = {
         position: {
-          x: 8 * tile,
-          y: 0,
+          x: tile * 8,
+          y: tile * 0,
         },
       };
 
+      collisionBlocks = map1.chunk();
+
       missileCollisionBlocks = {
         position: {
-          x: 2 * tile,
-          y: 5 * tile,
+          x: tile * 2,
+          y: tile * 5,
         },
       };
 
       player = new Player({
         imgSrc: "img/sprite/idle_down.png",
         position: {
-          x: 32,
-          y: 224,
+          x: tile * 1,
+          y: tile * 7,
         },
         animations: {
           idleLeft: {
@@ -118,7 +116,6 @@ let stages = {
       })),
         donuts.push(donut);
 
-      collisionBlocks = map1.chunk();
 
       function missile() {
         if (stageNum === 1) {
@@ -127,8 +124,8 @@ let stages = {
             const missile = new Missile({
               imgSrc: "img/missile_vertical.png",
               position: {
-                x: 64,
-                y: 40,
+                x: tile * 2,
+                y: tile * 1 + 8,
               },
               direction: "vertical",
             });
@@ -151,35 +148,37 @@ let stages = {
 
       goal = {
         position: {
-          x: 2 * tile,
-          y: 0,
+          x: tile * 2,
+          y: tile * 0,
         },
       };
 
+      collisionBlocks = map2.chunk();
+
       missileCollisionBlocks = {
         position: {
-          x: 3 * tile,
-          y: 4 * tile,
+          x: tile * 4,
+          y: tile * 5,
         },
       };
 
       enemyCollisionBlocks = {
         rotate: {
           0: {
-            x: 7 * tile,
-            y: 5 * tile,
+            x: tile * 7,
+            y: tile * 5,
           },
           1: {
-            x: 5 * tile,
-            y: 5 * tile,
+            x: tile * 5,
+            y: tile * 5,
           },
           2: {
-            x: 5 * tile,
-            y: 2 * tile,
+            x: tile * 5,
+            y: tile * 2,
           },
           3: {
-            x: 7 * tile,
-            y: 2 * tile,
+            x: tile * 7,
+            y: tile * 2,
           },
         },
       };
@@ -187,8 +186,8 @@ let stages = {
       player = new Player({
         imgSrc: "img/sprite/idle_down.png",
         position: {
-          x: 256,
-          y: 224,
+          x: tile * 8,
+          y: tile * 7,
         },
         animations: {
           idleLeft: {
@@ -217,8 +216,8 @@ let stages = {
           },
         },
         enemyCollisionPosition: {
-          x: 8 * tile + 4,
-          y: 4 * tile,
+          x: tile * 8 + 4,
+          y: tile * 4,
         },
       });
 
@@ -257,7 +256,6 @@ let stages = {
         enemies.push(enemy, enemy2);
       donuts.push(donut);
 
-      collisionBlocks = map2.chunk();
 
       function missile() {
         if (stageNum === 2) {
@@ -266,8 +264,8 @@ let stages = {
             const missile = new Missile({
               imgSrc: "img/missile_horizontal.png",
               position: {
-                x: 16,
-                y: 160,
+                x: tile * 0 + 8,
+                y: tile * 5,
               },
               direction: "horizontal",
             });
@@ -290,15 +288,17 @@ let stages = {
 
       goal = {
         position: {
-          x: 4 * tile,
-          y: 0,
+          x: tile * 4,
+          y: tile * 0,
         },
       };
 
+      collisionBlocks = map3.chunk();
+
       missileCollisionBlocks = {
         position: {
-          x: 0,
-          y: 4 * tile,
+          x: tile * 0,
+          y: tile * 4,
         },
       };
 
@@ -322,22 +322,22 @@ let stages = {
           },
         },
         vertical: {
-            0: {
-              x: 8 * tile,
-              y: 0,
-            },
-            1: {
-              x: 8 * tile,
-              y: 7 * tile,
-            },
+          0: {
+            x: tile * 8,
+            y: tile * 0,
+          },
+          1: {
+            x: tile * 8,
+            y: tile * 8,
+          },
         },
       };
 
       player = new Player({
         imgSrc: "img/sprite/idle_down.png",
         position: {
-          x: 64,
-          y: 224,
+          x: tile * 2,
+          y: tile * 7,
         },
         animations: {
           idleLeft: {
@@ -366,12 +366,11 @@ let stages = {
           },
         },
         enemyCollisionPosition: {
-          x: 2 * tile - 4,
-          y: 6 * tile,
+          x: tile * 2 - 4,
+          y: tile * 6,
         },
       });
 
-      
       (enemy = new Enemy({
         imgSrc: "img/sprite/slime2.png",
         position: {
@@ -396,7 +395,7 @@ let stages = {
             horizontal: false,
           },
         })),
-        enemy3 = new Enemy({
+        (enemy3 = new Enemy({
           imgSrc: "img/sprite/slime1.png",
           position: {
             x: 0,
@@ -407,14 +406,14 @@ let stages = {
             vertical: false,
             horizontal: false,
           },
-        });
-        (donut = new Objects({
-          imgSrc: "img/donut_L.png",
-          position: {
-            x: 2,
-            y: 1,
-          },
-        })),
+        }));
+      (donut = new Objects({
+        imgSrc: "img/donut_L.png",
+        position: {
+          x: 2,
+          y: 1,
+        },
+      })),
         (donutPlusLife = new Objects({
           imgSrc: "img/donut_plus.png",
           position: {
@@ -429,12 +428,10 @@ let stages = {
             y: 0,
           },
         })),
-      enemies.push(enemy, enemy2, enemy3);
+        enemies.push(enemy, enemy2, enemy3);
       donuts.push(donutPlusLife, donutMinusLife, donut);
 
-      collisionBlocks = map3.chunk();
 
-      // 3초간 기다리기 나중에 추가
       function missile() {
         if (stageNum === 3) {
           requestAnimationFrame(missile);
@@ -442,8 +439,8 @@ let stages = {
             const missile = new Missile({
               imgSrc: "img/missile_vertical.png",
               position: {
-                x: 0,
-                y: 16,
+                x: tile * 0,
+                y: tile * 0 + 8,
               },
               direction: "vertical",
             });
@@ -466,15 +463,17 @@ let stages = {
 
       goal = {
         position: {
-          x: 9 * tile,
-          y: 0,
+          x: tile * 9,
+          y: tile * 0,
         },
       };
 
+      collisionBlocks = map4.chunk();
+
       missileCollisionBlocks = {
         position: {
-          x: 2 * tile,
-          y: 5 * tile,
+          x: tile * 8,
+          y: tile * 6,
         },
       };
 
@@ -497,13 +496,33 @@ let stages = {
             y: tile * 1,
           },
         },
+        vertical: {
+          0: {
+            x: tile * 9,
+            y: tile * 0 -32,
+          },
+          1: {
+            x: tile * 9,
+            y: tile * 8,
+          },
+        },
+        horizontal: {
+          0: {
+            x: tile * 1,
+            y: tile * 0,
+          },
+          1: {
+            x: tile * 7,
+            y: tile * 0,
+          },
+        },
       };
 
       player = new Player({
         imgSrc: "img/sprite/idle_down.png",
         position: {
-          x: 128,
-          y: 224,
+          x: tile * 4,
+          y: tile * 7,
         },
         animations: {
           idleLeft: {
@@ -566,7 +585,7 @@ let stages = {
           },
           moveDirection: {
             rotate: false,
-            vertical: false,
+            vertical: true,
             horizontal: false,
           },
         })),
@@ -579,7 +598,7 @@ let stages = {
           moveDirection: {
             rotate: false,
             vertical: false,
-            horizontal: false,
+            horizontal: true,
           },
         }));
 
@@ -597,53 +616,34 @@ let stages = {
             y: 5,
           },
         })),
-        (donutMinusLife2 = new Objects({
-          imgSrc: "img/donut_minus.png",
+        (donutPlusLife = new Objects({
+          imgSrc: "img/donut_plus.png",
           position: {
             x: 6,
             y: 4,
           },
         })),
-        (donutMinusLife3 = new Objects({
-          imgSrc: "img/donut_minus.png",
-          position: {
-            x: 6,
-            y: 5,
-          },
-        })),
-        (donutMinusLife4 = new Objects({
-          imgSrc: "img/donut_minus.png",
-          position: {
-            x: 6,
-            y: 6,
-          },
-        })),
-        (donutMinusLife5 = new Objects({
-          imgSrc: "img/donut_minus.png",
-          position: {
-            x: 5,
-            y: 6,
-          },
-        })),
-        (donutMinusLife6 = new Objects({
-          imgSrc: "img/donut_minus.png",
-          position: {
-            x: 7,
-            y: 6,
-          },
-        })),
-        donuts.push(
-          donutMinusLife,
-          donutMinusLife2,
-          donutMinusLife3,
-          donutMinusLife4,
-          donutMinusLife5,
-          donutMinusLife6,
-          donut
-        );
+        donuts.push(donutMinusLife, donutPlusLife, donut);
       enemies.push(enemy, enemy2, enemy3, enemy4);
 
-      collisionBlocks = map4.chunk();
+      function missile() {
+        if (stageNum === 4) {
+          requestAnimationFrame(missile);
+          if (timer % 180 === 0) {
+            const missile = new Missile({
+              imgSrc: "img/missile_horizontal.png",
+              position: {
+                x: tile * 1 + 8,
+                y: tile * 6,
+              },
+              direction: "horizontal",
+            });
+            missiles.push(missile);
+          } else cancelAnimationFrame(missile);
+        }
+      }
+
+      missile();
     },
   },
   5: {
@@ -657,23 +657,46 @@ let stages = {
 
       goal = {
         position: {
-          x: 9 * tile,
-          y: 0,
+          x: tile * 9,
+          y: tile * 0,
+        },
+      };
+
+      collisionBlocks = map5.chunk();
+
+      enemyCollisionBlocks = {
+        rotate: {
+          0: {
+            x: tile * 3,
+            y: tile * 5,
+          },
+          1: {
+            x: tile * 0,
+            y: tile * 5,
+          },
+          2: {
+            x: tile * 0,
+            y: tile * 0,
+          },
+          3: {
+            x: tile * 3,
+            y: tile * 0,
+          },
         },
       };
 
       missileCollisionBlocks = {
         position: {
-          x: 2 * tile,
-          y: 5 * tile,
+          x: tile * 2,
+          y: tile * 5,
         },
       };
 
       player = new Player({
         imgSrc: "img/sprite/idle_down.png",
         position: {
-          x: 288,
-          y: 224,
+          x: tile * 9,
+          y: tile * 7,
         },
         animations: {
           idleLeft: {
@@ -735,7 +758,7 @@ let stages = {
             y: 1,
           },
           moveDirection: {
-            rotate: false,
+            rotate: true,
             vertical: false,
             horizontal: false,
           },
@@ -796,7 +819,25 @@ let stages = {
         donuts.push(donutPlusLife, donutMinusLife, donutMinusLife2, donut);
       enemies.push(enemy, enemy2, enemy3, enemy4, enemy5);
 
-      collisionBlocks = map5.chunk();
+      function missile() {
+        
+        if (stageNum === 5) {
+          requestAnimationFrame(missile);
+          if (timer % 120 === 0) {
+            const missile = new Missile({
+              imgSrc: "img/missile_horizontal.png",
+              position: {
+                x: tile * 7,
+                y: tile * 6,
+              },
+              direction: "horizontal",
+            });
+            missiles.push(missile);
+          } else cancelAnimationFrame(missile);
+        }
+      }
+
+      missile();
     },
   },
 };
@@ -828,14 +869,6 @@ const overlay = {
   opacity: 0,
 };
 
-// 하단 텍스트 드래그 방지
-document.oncontextmenu = function () {
-  return false;
-};
-document.onselectstart = function () {
-  return false;
-};
-
 // render
 function render() {
   timer++;
@@ -844,6 +877,8 @@ function render() {
     gameOver = requestAnimationFrame(render);
     c.clearRect(0, 0, canvas.width, canvas.height);
 
+    c.fillStyle = "#dcb198";
+    c.fillRect(0, 256, canvas.width, tile);
     backgroundStage.draw();
 
     donuts.forEach((donut) => donut.draw());
@@ -869,7 +904,8 @@ function render() {
     c.fillStyle = "black";
     c.fillRect(0, 0, canvas.width, canvas.height);
     c.restore();
-  } else cancelAnimationFrame(render);
+  } else stages[stageNum].init();
+  // 종료된 지점으로 돌아가기
 }
 
 stages[stageNum].init();

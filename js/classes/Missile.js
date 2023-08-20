@@ -27,12 +27,12 @@ class Missile extends Objects {
         (this.direction === "vertical" &&
           missile.position.y + 9 > missileCollisionBlocks.position.y + tile) ||
         (this.direction === "vertical" &&
-          missile.position.y + 23 > missileCollisionBlocks.position.y)
+          missile.position.y + missile.height - 9 > missileCollisionBlocks.position.y)
       )
         missiles.splice(i, 1);
       else if (
         (this.direction === "horizontal" &&
-          missile.position.x - 9 > missileCollisionBlocks.position.x) ||
+          missile.position.x + missile.width - 9 > missileCollisionBlocks.position.x) ||
         (this.direction === "horizontal" &&
           missile.position.x + 9 > missileCollisionBlocks.position.x + tile)
       )
