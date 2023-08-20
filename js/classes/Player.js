@@ -89,19 +89,7 @@ class Player {
         missile.position.y + 9 < this.position.y + this.height
       ) {
         missiles.splice(i, 1);
-        for (let i = 0; i < lives.length; i++) {
-          if (lives[i].status.empty.isEmpty) continue;
-          if (lives[i].status.filled.isFilled) {
-            lives[i].minusLife();
-            lives[i].status.empty.isEmpty = true;
-            lives[i].status.filled.isFilled = false;
-          }
-          break;
-        }
-        if (lives[2].status.empty.isEmpty) {
-          console.log(`you're dead`);
-          // 다시시작
-        }
+        this.minusLife();
       }
     });
   }
@@ -114,13 +102,24 @@ class Player {
         donuts[i].position.y + 16 > this.position.y &&
         donuts[i].position.y + 16 < this.position.y + tile
       ) {
-        score++;
-        scoreElement.innerText = score;
-        donuts.splice(i, 1);
-        break;
+        if (donuts[i].id === "score") {
+          score++;
+          donuts.splice(i, 1);
+          break;
+        } else if (donuts[i].id === "minus") {
+          this.minusLife();
+          donuts.splice(i, 1);
+          break;
+        } else if (donuts[i].id === "plus") {
+          this.plusLife();
+          donuts.splice(i, 1);
+          break;
+        }
       }
     }
   }
+
+ 
 
   getToGoalCheck() {
     if (
@@ -129,18 +128,48 @@ class Player {
       goal.position.y + 16 >= this.position.y &&
       score === stageNum
     ) {
-      stageNum++;
       stages[stageNum].clearStage = true;
+      stageNum++;
       gsap.to(overlay, {
         opacity: 1,
         onComplete: () => {
-          stageElement.innerText = stageNum;
           stages[stageNum].init();
           gsap.to(overlay, {
             opacity: 0,
           });
         },
       });
+    }
+  }
+
+  minusLife() {
+    for (let i = 0; i < lives.length; i++) {
+      if (lives[i].status.empty.isEmpty) continue;
+      if (lives[i].status.filled.isFilled) {
+        lives[i].swipeEmpty();
+        lives[i].status.empty.isEmpty = true;
+        lives[i].status.filled.isFilled = false;
+      }
+      break;
+    }
+    if (lives[2].status.empty.isEmpty) {
+      console.log(`you're dead`);
+      // 다시시작
+    }
+  }
+
+  plusLife() {
+    for (let i = lives.length - 1; i >= 0; i--) {
+      if (lives[i].status.filled.isFilled) continue;
+      if (lives[i].status.empty.isEmpty) {
+        lives[i].swipeFilled();
+        lives[i].status.empty.isEmpty = false;
+        lives[i].status.filled.isFilled = true;
+      }
+      break;
+    }
+    if (lives[0].status.filled.isFilled) {
+      console.log(`you're fully charged!`);
     }
   }
 

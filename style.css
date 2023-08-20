@@ -3,12 +3,11 @@
   src: url('src/Minecraft.ttf');
 }
 
-/* 하단 텍스트 드래그시 복사 방지 */
-html, body {
-  cursor: default;
-}
+
 
 * {
+  box-sizing: border-box;
+  text-align: center;
   font-family: minecraft;
   color: #3d200c;
 }
@@ -18,41 +17,42 @@ p {
   position: absolute;
 }
 
+button {
+  border: none;
+  width: 120px;
+  padding: 8px;
+  font-size: 16px;
+  background: rgb(255, 213, 106);
+  border-radius: 16px;
+}
+
 body {
-  padding: 0;
+  margin: 0;
   background: #eee;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  
 }
 
 canvas {
+  display: none;
+  margin: 200px auto 0;
+  transform: scale(2);
   width: 320px;
   height: 288px;
   image-rendering: pixelated;
 }
 
 h1 {
-  text-align: center;
   color: #3d200c;
 }
 
-.container {
-  margin-top: 200px;
+.title-screen {
+  padding-top: 1px;
   transform: scale(2);
+  margin: 200px auto 0;
+  width: 320px;
+  height: 288px;
+  background: #ffffff;
 }
 
-.text-wrap {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.stage, .score {
-  margin-top: 560px;
-}
-
-.score {
-  margin-left: 266px;
+.wrap {
+  margin-top: 40px;
 }

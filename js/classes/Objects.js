@@ -1,5 +1,5 @@
 class Objects {
-  constructor({ imgSrc, position }) {
+  constructor({ imgSrc, position, id }) {
     this.img = new Image();
     this.img.src = imgSrc;
     this.img.onload = () => {
@@ -12,9 +12,9 @@ class Objects {
       x: tile * position.x,
       y: tile * position.y,
     };
-
     this.frame = 0;
     this.timer = 0;
+    this.id = id;
   }
 
   update() {

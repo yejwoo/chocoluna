@@ -20,11 +20,11 @@ class Status {
     }
   }
 
-  minusLife() {    
+  swipeEmpty() {    
     this.img = this.status["empty"].img;
   }
-  
-  plusLife() {    
+
+  swipeFilled() {    
     this.img = this.status["filled"].img;
   }
 

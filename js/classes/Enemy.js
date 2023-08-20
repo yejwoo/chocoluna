@@ -17,7 +17,7 @@ class Enemy extends Objects {
   }
 
   update() {
-    this.timer++;
+    this.timer++;    
     this.collisionCheck();
 
     if (this.timer % 13 === 0) this.frame++;
@@ -99,7 +99,7 @@ class Enemy extends Objects {
       for (let i = 0; i < lives.length; i++) {
         if (lives[i].status.empty.isEmpty) continue;
         if (lives[i].status.filled.isFilled) {
-          lives[i].minusLife();
+          lives[i].swipeEmpty();
           lives[i].status.empty.isEmpty = true;
           lives[i].status.filled.isFilled = false;
         }
