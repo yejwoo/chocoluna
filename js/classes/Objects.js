@@ -7,7 +7,7 @@ class Objects {
       this.width = this.img.width;
       this.height = this.img.height;
     };
-
+    
     this.position = {
       x: tile * position.x,
       y: tile * position.y,

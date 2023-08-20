@@ -1,41 +1,43 @@
 class Enemy extends Objects {
-  constructor({ imgSrc, position, moveDirection }) {
+  constructor({ imgSrc, position, moveDirection, id }) {
     super({ imgSrc, position });
     this.vx = 1;
     this.vy = 1;
     this.moveDirection = moveDirection;
+    this.id = id;
     this.img.onload = () => {
       this.draw();
       this.width = this.img.width / 4;
       this.height = this.img.height;
     };
+
+    for (let key in player.enemyCollisionPosition) {
+      if(this.id === key) this.collisionCheck();
+    }
   }
 
   update() {
     this.timer++;
+    this.collisionCheck();
 
     if (this.timer % 13 === 0) this.frame++;
     if (this.frame > 3) this.frame = 0;
 
     if (this.moveDirection.rotate) {
       this.moveRotation();
-      this.collisionCheck();
     } else if (this.moveDirection.vertical) {
       this.moveVertical();
-      this.collisionCheck();
     } else if (this.moveDirection.horizontal) {
       this.moveHorizontal();
-      this.collisionCheck();
     }
   }
 
   moveVertical() {
     this.position.y += this.vy;
 
-    if(this.position.y + this.height > enemyCollisionBlocks.vertical[1].y) {
+    if (this.position.y + this.height > enemyCollisionBlocks.vertical[1].y) {
       this.vy = -1;
-    }
-    else if(this.position.y < enemyCollisionBlocks.vertical[0].y + tile) {
+    } else if (this.position.y < enemyCollisionBlocks.vertical[0].y + tile) {
       this.vy = 2;
     }
   }
@@ -43,12 +45,12 @@ class Enemy extends Objects {
   moveHorizontal() {
     this.position.x += this.vx;
 
-    if(this.position.x + this.height > enemyCollisionBlocks.horizontal[1].x) {
+    if (this.position.x + this.height > enemyCollisionBlocks.horizontal[1].x) {
       this.vx = -1;
-    }
-    else if(this.position.x < enemyCollisionBlocks.horizontal[0].x + tile) {
+    } else if (this.position.x < enemyCollisionBlocks.horizontal[0].x + tile) {
       this.vx = 1;
     }
+
 
   }
 
@@ -91,9 +93,22 @@ class Enemy extends Objects {
       this.position.y + this.height - 4 > player.position.y &&
       this.position.y + 4 < player.position.y + player.height
     ) {
-      player.position.x = player.enemyCollisionPosition.x;
-      player.position.y = player.enemyCollisionPosition.y;
-      life.update();
+      player.position.x = player.enemyCollisionPosition[this.id].x
+      player.position.y = player.enemyCollisionPosition[this.id].y
+
+      for (let i = 0; i < lives.length; i++) {
+        if (lives[i].status.empty.isEmpty) continue;
+        if (lives[i].status.filled.isFilled) {
+          lives[i].minusLife();
+          lives[i].status.empty.isEmpty = true;
+          lives[i].status.filled.isFilled = false;
+        }
+        break;
+      }
+      if (lives[2].status.empty.isEmpty) {
+        console.log(`you're dead`);
+        // 다시시작
+      }
     }
   }
 }

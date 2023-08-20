@@ -88,8 +88,20 @@ class Player {
         missile.position.y + missile.height - 9 > this.position.y &&
         missile.position.y + 9 < this.position.y + this.height
       ) {
-        life.update();
         missiles.splice(i, 1);
+        for (let i = 0; i < lives.length; i++) {
+          if (lives[i].status.empty.isEmpty) continue;
+          if (lives[i].status.filled.isFilled) {
+            lives[i].minusLife();
+            lives[i].status.empty.isEmpty = true;
+            lives[i].status.filled.isFilled = false;
+          }
+          break;
+        }
+        if (lives[2].status.empty.isEmpty) {
+          console.log(`you're dead`);
+          // 다시시작
+        }
       }
     });
   }
@@ -133,17 +145,16 @@ class Player {
   }
 
   draw() {
-    // 크기 24px, 좌측 -8 우측 +8
     c.drawImage(
       this.img,
-      24 * this.frame,
+      this.width * this.frame,
       0,
-      24,
-      24,
+      this.width,
+      this.height,
       this.position.x + 4,
       this.position.y + 4,
-      24,
-      24
+      this.width,
+      this.height
     );
   }
 }
