@@ -3,32 +3,45 @@
   src: url('src/Minecraft.ttf');
 }
 
+:root {
+  --dark-brown: #160900;
+  --brown: #3d200c;
+  --yellow: #ffd56a;
+}
 
 
 * {
   box-sizing: border-box;
   text-align: center;
   font-family: minecraft;
-  color: #3d200c;
 }
 
 p {
   font-size: 14px;
-  position: absolute;
+  color: white;
+  margin: 16px 0 0;
+  
 }
 
 button {
   border: none;
-  width: 120px;
+  width: 80px;
+  margin-top: 40px;
   padding: 8px;
-  font-size: 16px;
-  background: rgb(255, 213, 106);
+  font-size: 14px;
   border-radius: 16px;
+  background: var(--yellow);
+  color: 160900;
+}
+
+button:hover {
+  background: var(--yellow);
+  cursor: pointer;
 }
 
 body {
   margin: 0;
-  background: #eee;
+  background-image: url('img/bg.png');
 }
 
 canvas {
@@ -41,7 +54,7 @@ canvas {
 }
 
 h1 {
-  color: #3d200c;
+  color: var(--brown);
 }
 
 .title-screen {
@@ -50,9 +63,9 @@ h1 {
   margin: 200px auto 0;
   width: 320px;
   height: 288px;
-  background: #ffffff;
+  background: var(--dark-brown);
 }
 
 .wrap {
-  margin-top: 40px;
+  margin-top: 80px;
 }

@@ -12,6 +12,10 @@ class Stage {
   }
 }
 
+const endingImg = new Stage({
+  imgSrc: "img/ending_screen.png"
+})
+
 let backgroundStage,
   enemies = [],
   donuts = [],
@@ -31,7 +35,6 @@ let backgroundStage,
   missileCollisionBlocks,
   collisionBlocks;
 
-// 마무리 단계 -> stages를 class로 변경하기?
 let stages = {
   1: {
     clearStage: false,
@@ -705,7 +708,7 @@ let stages = {
 
       goal = {
         position: {
-          x: tile * 9,
+          x: tile * 1,
           y: tile * 0,
         },
       };
@@ -753,8 +756,8 @@ let stages = {
       player = new Player({
         imgSrc: "img/sprite/idle_down.png",
         position: {
-          x: tile * 9,
-          y: tile * 7,
+          x: tile * 0,
+          y: tile * 1,
         },
         animations: {
           idleLeft: {
@@ -882,9 +885,9 @@ let stages = {
         donuts.push(donutPlusLife, donutMinusLife, donut);
       enemies.push(enemy, enemy2, enemy3, enemy4);
 
-      function missile1() {
+      function missile() {
         if (stageNum === 5) {
-          requestAnimationFrame(missile1);
+          requestAnimationFrame(missile);
           if (timer % 180 === 0) {
             const missile = new Missile({
               imgSrc: "img/missile_vertical.png",
@@ -895,11 +898,10 @@ let stages = {
               direction: "vertical",
             });
             missiles.push(missile);
-          } else cancelAnimationFrame(missile1);
+          } else cancelAnimationFrame(missile);
         }
       }
-
-      missile1();
+      missile()
     },
-  },
+  }
 };

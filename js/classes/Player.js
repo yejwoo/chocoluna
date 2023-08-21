@@ -35,9 +35,9 @@ class Player {
     this.timer++;
     if (this.timer % 13 === 0) this.frame++;
     if (this.frame > 3) this.frame = 0;
+
     if (this.position.y < 0) {
       this.position.y = 0;
-      this.vy = 0;
     }
     if (this.position.y > 227) {
       this.position.y = 227;
@@ -68,12 +68,12 @@ class Player {
             blockX + 24 > this.position.x &&
             blockX < this.position.x + 24 &&
             blockY + 24 > this.position.y &&
-            blockY < this.position.y + 24
+            blockY < this.position.y + 28
           ) {
-            if (this.vx === -velocity) this.position.x = blockX + 24;
-            else if (this.vx === velocity) this.position.x = blockX - 24;
-            else if (this.vy === -velocity) this.position.y = blockY + 24;
-            else if (this.vy === velocity) this.position.y = blockY - 24;
+            if (keys.ArrowLeft) this.position.x = blockX + 24;
+            else if (keys.ArrowRight) this.position.x = blockX - 24;
+            else if (keys.ArrowUp) this.position.y = blockY + 24;
+            else if (keys.ArrowDown) this.position.y = blockY - 28;
           }
         }
       });
@@ -119,8 +119,6 @@ class Player {
     }
   }
 
- 
-
   getToGoalCheck() {
     if (
       goal.position.x - 8 <= this.position.x &&
@@ -129,16 +127,21 @@ class Player {
       score === stageNum
     ) {
       stages[stageNum].clearStage = true;
-      stageNum++;
-      gsap.to(overlay, {
-        opacity: 1,
-        onComplete: () => {
-          stages[stageNum].init();
-          gsap.to(overlay, {
-            opacity: 0,
-          });
-        },
-      });
+
+      if (stageNum !== 5) {
+        stageNum++;
+        gsap.to(overlay, {
+          opacity: 1,
+          onComplete: () => {
+            stages[stageNum].init();
+            gsap.to(overlay, {
+              opacity: 0,
+            });
+          },
+        });
+      } else {
+        GAME_OVER = true;
+      }
     }
   }
 
@@ -167,9 +170,6 @@ class Player {
         lives[i].status.filled.isFilled = true;
       }
       break;
-    }
-    if (lives[0].status.filled.isFilled) {
-      console.log(`you're fully charged!`);
     }
   }
 
