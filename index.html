@@ -7,10 +7,39 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <div class="audio">
+      <img src="img/web/sound_on.png" alt="sound_on.png"  draggable="false">
+      <img src="img/web/mute.png" alt="mute.png"  draggable="false">
+    </div>
     <div class="title-screen">
-      <div class="wrap">
-        <img src="/img/game_title.png" alt="ChocoLuna" draggable="false">
-        <button>START</button>
+      <div class="popup">
+        <img src="img/web/game_title.png" alt="ChocoLuna" draggable="false" />
+        <div>
+          <button>START</button>
+          <button>HOW TO PLAY</button>
+        </div>
+      
+      </div>
+    </div>
+    <div class="how-to-play">
+      <div class="popup">
+        <h3>HOW TO PLAY</h3>
+        <p>Find five choco donuts <img src="img/web/donut_S.png" alt="donut_S.png" /> <br>
+          and follow the arrow up <img src="img/web/goal.png" alt="goal.png"> tile !</p> 
+        <p>
+          You can play with <img src="img/web/key_up.png" alt="key_up.png" />
+          <img src="img/web/key_down.png" alt="key_down.png" />
+          <img src="img/web/key_left.png" alt="key_left.png" />
+          <img src="img/web/key_right.png" alt="key_right.png" />
+          keys.
+        </p>
+        <button>BACK</button>
+      </div>
+    </div>
+    <div class="game-over">
+      <div class="popup">
+        <h3>GAME OVER</h3>
+        <button>REPLAY</button>
       </div>
     </div>
     <canvas></canvas>

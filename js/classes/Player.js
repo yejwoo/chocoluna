@@ -127,21 +127,16 @@ class Player {
       score === stageNum
     ) {
       stages[stageNum].clearStage = true;
-
-      if (stageNum !== 5) {
-        stageNum++;
-        gsap.to(overlay, {
-          opacity: 1,
-          onComplete: () => {
-            stages[stageNum].init();
-            gsap.to(overlay, {
-              opacity: 0,
-            });
-          },
-        });
-      } else {
-        GAME_OVER = true;
-      }
+      stageNum++;
+      gsap.to(overlay, {
+        opacity: 1,
+        onComplete: () => {
+          stages[stageNum].init();
+          gsap.to(overlay, {
+            opacity: 0,
+          });
+        },
+      });
     }
   }
 
@@ -156,8 +151,8 @@ class Player {
       break;
     }
     if (lives[2].status.empty.isEmpty) {
-      console.log(`you're dead`);
-      // 다시시작
+      gameOver.style.display = "block";
+      GAME_OVER = true;
     }
   }
 

@@ -1,6 +1,11 @@
-// 초기 세팅
-const start = document.querySelector(".title-screen button");
+// Initial setting
+const start = document.querySelectorAll(".title-screen button")[0];
+const howToPLAY = document.querySelectorAll(".title-screen button")[1];
+const replay = document.querySelector(".game-over button");
+const back = document.querySelector(".how-to-play button");
+const howToScreen = document.querySelector(".how-to-play");
 const titleScreen = document.querySelector(".title-screen");
+const gameOver = document.querySelector(".game-over");
 const canvas = document.querySelector("canvas");
 const c = canvas.getContext("2d");
 const tile = 32;
@@ -13,64 +18,12 @@ let GAME_OVER = false;
 canvas.width = tile * 10;
 canvas.height = tile * 9;
 
-const life1 = new Status({
-  imgSrc: "img/life_filled.png",
-  position: {
-    x: 40,
-    y: 262,
-  },
-  status: {
-    filled: {
-      isFilled: true,
-      imgSrc: "img/life_filled.png",
-    },
-    empty: {
-      isEmpty: false,
-      imgSrc: "img/life_empty.png",
-    },
-  },
+const endingImg = new Stage({
+  imgSrc: "img/web/ending_screen.png",
 });
-
-const life2 = new Status({
-  imgSrc: "img/life_filled.png",
-  position: {
-    x: 24,
-    y: 262,
-  },
-  status: {
-    filled: {
-      isFilled: true,
-      imgSrc: "img/life_filled.png",
-    },
-    empty: {
-      isEmpty: false,
-      imgSrc: "img/life_empty.png",
-    },
-  },
-});
-
-const life3 = new Status({
-  imgSrc: "img/life_filled.png",
-  position: {
-    x: 8,
-    y: 262,
-  },
-  status: {
-    filled: {
-      isFilled: true,
-      imgSrc: "img/life_filled.png",
-    },
-    empty: {
-      isEmpty: false,
-      imgSrc: "img/life_empty.png",
-    },
-  },
-});
-
-lives.push(life1, life2, life3);
 
 const donutScore = new Status({
-  imgSrc: "img/donut_S.png",
+  imgSrc: "img/assets/donut_S.png",
   position: {
     x: 262,
     y: 264,
@@ -81,13 +34,30 @@ const overlay = {
   opacity: 0,
 };
 
+start.addEventListener("click", () => {
+  canvas.style.display = "block";
+  titleScreen.style.display = "none";
+  howToPLAY.style.display = "block";
+});
+
+howToPLAY.addEventListener("click", () => {
+  howToScreen.style.display = "block";
+  titleScreen.style.display = "none";
+})
+
+back.addEventListener("click", () => {
+  howToScreen.style.display = "none";
+  titleScreen.style.display = "block";
+})
+
+
+
 
 // render
 function render() {
   timer++;
 
   if (!GAME_OVER) {
-    requestAnimationFrame(render);
     c.clearRect(0, 0, canvas.width, canvas.height);
 
     c.fillStyle = "#dcb198";
@@ -126,28 +96,12 @@ function render() {
     c.fillRect(0, 0, canvas.width, canvas.height);
     c.restore();
   } else {
-
-    c.save();
-    c.globalAlpha = overlay.opacity;
-    c.fillStyle = "#160900";
-    c.fillRect(0, 0, canvas.width, canvas.height);
-    c.restore();
-
-    gsap.to(overlay, {
-      opacity: 1,
-      onComplete: () => {
-        gsap.to(overlay, {
-          opacity: 0,
-        });
-      },
-    });
+    cancelAnimationFrame(render)
+    canvas.style.display = "none";
   }
+  requestAnimationFrame(render);
 }
 
 stages[stageNum].init();
 render();
 
-start.addEventListener("click", () => {
-  canvas.style.display = "block";
-  titleScreen.style.display = "none";
-});

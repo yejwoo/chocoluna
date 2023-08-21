@@ -12,10 +12,6 @@ class Stage {
   }
 }
 
-const endingImg = new Stage({
-  imgSrc: "img/ending_screen.png"
-})
-
 let backgroundStage,
   enemies = [],
   donuts = [],
@@ -39,6 +35,64 @@ let stages = {
   1: {
     clearStage: false,
     init: () => {
+      const life1 = new Status({
+        imgSrc: "img/assets/life_filled.png",
+        position: {
+          x: 40,
+          y: 262,
+        },
+        status: {
+          filled: {
+            isFilled: true,
+            imgSrc: "img/assets/life_filled.png",
+          },
+          empty: {
+            isEmpty: false,
+            imgSrc: "img/assets/life_empty.png",
+          },
+        },
+      });
+
+      const life2 = new Status({
+        imgSrc: "img/assets/life_filled.png",
+        position: {
+          x: 24,
+          y: 262,
+        },
+        status: {
+          filled: {
+            isFilled: true,
+            imgSrc: "img/assets/life_filled.png",
+          },
+          empty: {
+            isEmpty: false,
+            imgSrc: "img/assets/life_empty.png",
+          },
+        },
+      });
+
+      const life3 = new Status({
+        imgSrc: "img/assets/life_filled.png",
+        position: {
+          x: 8,
+          y: 262,
+        },
+        status: {
+          filled: {
+            isFilled: true,
+            imgSrc: "img/assets/life_filled.png",
+          },
+          empty: {
+            isEmpty: false,
+            imgSrc: "img/assets/life_empty.png",
+          },
+        },
+      });
+
+      lives.push(life1, life2, life3);
+
+      score = 0;
+
       backgroundStage = new Stage({
         imgSrc: "img/map/stage1.png",
       });
@@ -91,9 +145,16 @@ let stages = {
             imgSrc: "img/sprite/walk_down.png",
           },
         },
+        enemyCollisionPosition: {
+          1: {
+            x: tile * 1,
+            y: tile * 5,
+          },
+        },
       });
 
       (enemy1 = new Enemy({
+        id: 1,
         imgSrc: "img/sprite/slime1.png",
         position: {
           x: 2,
@@ -109,7 +170,7 @@ let stages = {
 
       (donut = new Objects({
         id: "score",
-        imgSrc: "img/donut_L.png",
+        imgSrc: "img/assets/donut_L.png",
         position: {
           x: 8,
           y: 4,
@@ -122,7 +183,7 @@ let stages = {
           requestAnimationFrame(missile);
           if (timer % 80 === 0) {
             const missile = new Missile({
-              imgSrc: "img/missile_vertical.png",
+              imgSrc: "img/assets/missile_vertical.png",
               position: {
                 x: tile * 2,
                 y: tile * 1 + 8,
@@ -257,7 +318,7 @@ let stages = {
       })),
         (donut = new Objects({
           id: "score",
-          imgSrc: "img/donut_L.png",
+          imgSrc: "img/assets/donut_L.png",
           position: {
             x: 6,
             y: 6,
@@ -271,7 +332,7 @@ let stages = {
           requestAnimationFrame(missile);
           if (timer % 90 === 0) {
             const missile = new Missile({
-              imgSrc: "img/missile_horizontal.png",
+              imgSrc: "img/assets/missile_horizontal.png",
               position: {
                 x: tile * 0 + 8,
                 y: tile * 5,
@@ -431,7 +492,7 @@ let stages = {
         }));
       (donut = new Objects({
         id: "score",
-        imgSrc: "img/donut_L.png",
+        imgSrc: "img/assets/donut_L.png",
         position: {
           x: 2,
           y: 1,
@@ -439,7 +500,7 @@ let stages = {
       })),
         (donutPlusLife = new Objects({
           id: "plus",
-          imgSrc: "img/donut_plus.png",
+          imgSrc: "img/assets/donut_plus.png",
           position: {
             x: 7,
             y: 0,
@@ -447,7 +508,7 @@ let stages = {
         })),
         (donutMinusLife1 = new Objects({
           id: "minus",
-          imgSrc: "img/donut_minus.png",
+          imgSrc: "img/assets/donut_minus.png",
           position: {
             x: 9,
             y: 0,
@@ -461,7 +522,7 @@ let stages = {
           requestAnimationFrame(missile);
           if (timer % 200 === 0) {
             const missile = new Missile({
-              imgSrc: "img/missile_vertical.png",
+              imgSrc: "img/assets/missile_vertical.png",
               position: {
                 x: tile * 0,
                 y: tile * 0 + 8,
@@ -651,7 +712,7 @@ let stages = {
         })),
         (donut = new Objects({
           id: "score",
-          imgSrc: "img/donut_L.png",
+          imgSrc: "img/assets/donut_L.png",
           position: {
             x: 4,
             y: 4,
@@ -659,7 +720,7 @@ let stages = {
         })),
         (donutMinusLife1 = new Objects({
           id: "minus",
-          imgSrc: "img/donut_minus.png",
+          imgSrc: "img/assets/donut_minus.png",
           position: {
             x: 5,
             y: 5,
@@ -667,7 +728,7 @@ let stages = {
         })),
         (donutPlusLife = new Objects({
           id: "plus",
-          imgSrc: "img/donut_plus.png",
+          imgSrc: "img/assets/donut_plus.png",
           position: {
             x: 6,
             y: 4,
@@ -681,7 +742,7 @@ let stages = {
           requestAnimationFrame(missile);
           if (timer % 180 === 0) {
             const missile = new Missile({
-              imgSrc: "img/missile_horizontal.png",
+              imgSrc: "img/assets/missile_horizontal.png",
               position: {
                 x: tile * 1 + 8,
                 y: tile * 6,
@@ -756,8 +817,8 @@ let stages = {
       player = new Player({
         imgSrc: "img/sprite/idle_down.png",
         position: {
-          x: tile * 0,
-          y: tile * 1,
+          x: tile * 9,
+          y: tile * 7,
         },
         animations: {
           idleLeft: {
@@ -860,7 +921,7 @@ let stages = {
 
       (donut = new Objects({
         id: "score",
-        imgSrc: "img/donut_L.png",
+        imgSrc: "img/assets/donut_L.png",
         position: {
           x: 3,
           y: 0,
@@ -868,7 +929,7 @@ let stages = {
       })),
         (donutMinusLife = new Objects({
           id: "minus",
-          imgSrc: "img/donut_minus.png",
+          imgSrc: "img/assets/donut_minus.png",
           position: {
             x: 6,
             y: 3,
@@ -876,7 +937,7 @@ let stages = {
         })),
         (donutPlusLife = new Objects({
           id: "plus",
-          imgSrc: "img/donut_plus.png",
+          imgSrc: "img/assets/donut_plus.png",
           position: {
             x: 6,
             y: 5,
@@ -890,7 +951,7 @@ let stages = {
           requestAnimationFrame(missile);
           if (timer % 180 === 0) {
             const missile = new Missile({
-              imgSrc: "img/missile_vertical.png",
+              imgSrc: "img/assets/missile_vertical.png",
               position: {
                 x: tile * 8,
                 y: tile * 1 + 8,
@@ -901,7 +962,7 @@ let stages = {
           } else cancelAnimationFrame(missile);
         }
       }
-      missile()
+      missile();
     },
-  }
+  },
 };

@@ -106,8 +106,7 @@ class Enemy extends Objects {
         break;
       }
       if (lives[2].status.empty.isEmpty) {
-        console.log(`you're dead`);
-        // 다시시작
+        gameOver.style.display = "block";
       }
     }
   }
