@@ -5,47 +5,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="stylesheet" href="style.css" />
+    <link rel="short icon" href="#">
   </head>
   <body>
-    <div class="audio">
-      <img src="img/web/sound_on.png" alt="sound_on.png"  draggable="false">
-      <img src="img/web/mute.png" alt="mute.png"  draggable="false">
-    </div>
-    <div class="title-screen">
+    <div class="title-screen show">
       <div class="popup">
         <img src="img/web/game_title.png" alt="ChocoLuna" draggable="false" />
-        <div>
+        <div class="buttons">
           <button>START</button>
           <button>HOW TO PLAY</button>
         </div>
-      
+        <div class="audio">
+          <img style="display: none;" src="img/web/sound_on.png" alt="sound_on.png" draggable="false"/>
+          <img style="display: block;" src="img/web/sound_off.png" alt="mute.png" draggable="false" />
+        </div>
       </div>
     </div>
     <div class="how-to-play">
       <div class="popup">
         <h3>HOW TO PLAY</h3>
-        <p>Find five choco donuts <img src="img/web/donut_S.png" alt="donut_S.png" /> <br>
-          and follow the arrow up <img src="img/web/goal.png" alt="goal.png"> tile !</p> 
         <p>
-          You can play with <img src="img/web/key_up.png" alt="key_up.png" />
-          <img src="img/web/key_down.png" alt="key_down.png" />
-          <img src="img/web/key_left.png" alt="key_left.png" />
-          <img src="img/web/key_right.png" alt="key_right.png" />
-          keys.
+          Find five choco donuts
+          <img src="img/web/donut_S.png" alt="donut_S.png" /> <br />
+          and follow the arrow up
+          <img src="img/web/goal.png" alt="goal.png" /> tile ! <br />
         </p>
+
+        <p>You can play with Arrow Keys.</p>
         <button>BACK</button>
       </div>
     </div>
     <div class="game-over">
       <div class="popup">
+        <img src="img/web/game_over.png" alt="game_over.png" />
         <h3>GAME OVER</h3>
-        <button>REPLAY</button>
+        <button>
+          <div class="wrap">
+            <img src="img/web/replay.png" alt="replay.png" /> 
+            <span>TRY AGAIN</span>
+          </div>
+        </button>
       </div>
     </div>
     <canvas></canvas>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="src/sound.js"></script>
+    <script src="js/sound.js"></script>
     <script src="js/map/data.js"></script>
     <script src="js/utils.js"></script>
     <script src="js/map/stage.js"></script>
@@ -54,7 +59,8 @@
     <script src="js/classes/Missile.js"></script>
     <script src="js/classes/Enemy.js"></script>
     <script src="js/classes/Status.js"></script>
+    <script src="js/setting.js"></script>
     <script src="js/eventlisteners.js"></script>
-    <script src="js/main.js"></script>
+    <script src="js/gameloop.js"></script>
   </body>
 </html>

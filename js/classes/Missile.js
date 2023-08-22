@@ -5,18 +5,23 @@ class Missile extends Objects {
       x: position.x,
       y: position.y,
     };
-    this.vx = 0;
-    this.vy = 0;
+    this.vx = 1;
+    this.vy = 1;
     this.direction = direction;
   }
 
   update() {
     if (this.direction === "vertical") {
-      this.vy = 1;
       this.position.y += this.vy;
+      if(stageNum === 5) {
+        this.vy+=0.05;
+      }
+
     } else if (this.direction === "horizontal") {
-      this.vx = 1;
       this.position.x += this.vx;
+      if(stageNum === 4) {
+        this.vx+=0.05;
+      }
     }
     this.blockCollisionCheck();
   }
@@ -27,7 +32,8 @@ class Missile extends Objects {
         (this.direction === "vertical" &&
           missile.position.y + 9 > missileCollisionBlocks.position.y + tile) ||
         (this.direction === "vertical" &&
-          missile.position.y + missile.height - 9 > missileCollisionBlocks.position.y)
+          missile.position.y + missile.height - 9 >
+            missileCollisionBlocks.position.y)
       )
         missiles.splice(i, 1);
       else if (
@@ -39,9 +45,6 @@ class Missile extends Objects {
       )
         missiles.splice(i, 1);
     });
-
-
-    
   }
 
   draw() {

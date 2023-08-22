@@ -35,63 +35,9 @@ let stages = {
   1: {
     clearStage: false,
     init: () => {
-      const life1 = new Status({
-        imgSrc: "img/assets/life_filled.png",
-        position: {
-          x: 40,
-          y: 262,
-        },
-        status: {
-          filled: {
-            isFilled: true,
-            imgSrc: "img/assets/life_filled.png",
-          },
-          empty: {
-            isEmpty: false,
-            imgSrc: "img/assets/life_empty.png",
-          },
-        },
-      });
-
-      const life2 = new Status({
-        imgSrc: "img/assets/life_filled.png",
-        position: {
-          x: 24,
-          y: 262,
-        },
-        status: {
-          filled: {
-            isFilled: true,
-            imgSrc: "img/assets/life_filled.png",
-          },
-          empty: {
-            isEmpty: false,
-            imgSrc: "img/assets/life_empty.png",
-          },
-        },
-      });
-
-      const life3 = new Status({
-        imgSrc: "img/assets/life_filled.png",
-        position: {
-          x: 8,
-          y: 262,
-        },
-        status: {
-          filled: {
-            isFilled: true,
-            imgSrc: "img/assets/life_filled.png",
-          },
-          empty: {
-            isEmpty: false,
-            imgSrc: "img/assets/life_empty.png",
-          },
-        },
-      });
-
-      lives.push(life1, life2, life3);
-
       score = 0;
+
+     
 
       backgroundStage = new Stage({
         imgSrc: "img/map/stage1.png",
@@ -143,6 +89,9 @@ let stages = {
           },
           walkDown: {
             imgSrc: "img/sprite/walk_down.png",
+          },
+          damaged: {
+            imgSrc: "img/sprite/damaged.png",
           },
         },
         enemyCollisionPosition: {
@@ -275,6 +224,9 @@ let stages = {
           },
           walkDown: {
             imgSrc: "img/sprite/walk_down.png",
+          },
+          damaged: {
+            imgSrc: "img/sprite/damaged.png",
           },
         },
         enemyCollisionPosition: {
@@ -435,6 +387,9 @@ let stages = {
           walkDown: {
             imgSrc: "img/sprite/walk_down.png",
           },
+          damaged: {
+            imgSrc: "img/sprite/damaged.png",
+          },
         },
         enemyCollisionPosition: {
           1: {
@@ -479,6 +434,7 @@ let stages = {
           },
         })),
         (enemy3 = new Enemy({
+          id: 3,
           imgSrc: "img/sprite/slime1.png",
           position: {
             x: 0,
@@ -635,6 +591,9 @@ let stages = {
           walkDown: {
             imgSrc: "img/sprite/walk_down.png",
           },
+          damaged: {
+            imgSrc: "img/sprite/damaged.png",
+          },
         },
         enemyCollisionPosition: {
           1: {
@@ -737,20 +696,31 @@ let stages = {
         donuts.push(donutMinusLife1, donutPlusLife, donut);
       enemies.push(enemy1, enemy2, enemy3, enemy4);
 
+      let isMissileBursted = false;
+
       function missile() {
         if (stageNum === 4) {
           requestAnimationFrame(missile);
-          if (timer % 180 === 0) {
-            const missile = new Missile({
-              imgSrc: "img/assets/missile_horizontal.png",
-              position: {
-                x: tile * 1 + 8,
-                y: tile * 6,
-              },
-              direction: "horizontal",
-            });
-            missiles.push(missile);
-          } else cancelAnimationFrame(missile);
+          if (isMissileBursted) {
+            if (timer % 10 === 0) {
+              const missile = new Missile({
+                imgSrc: "img/assets/missile_horizontal.png",
+                position: {
+                  x: tile * 1 + 8,
+                  y: tile * 6,
+                },
+                direction: "horizontal",
+              });
+              missiles.push(missile);
+            }
+          } else {
+            setTimeout(() => {
+              isMissileBursted = true;
+              setTimeout(() => {
+                isMissileBursted = false;
+              }, 3000);
+            }, 3000);
+          }
         }
       }
 
@@ -844,6 +814,9 @@ let stages = {
           },
           walkDown: {
             imgSrc: "img/sprite/walk_down.png",
+          },
+          damaged: {
+            imgSrc: "img/sprite/damaged.png",
           },
         },
         enemyCollisionPosition: {
@@ -946,22 +919,34 @@ let stages = {
         donuts.push(donutPlusLife, donutMinusLife, donut);
       enemies.push(enemy, enemy2, enemy3, enemy4);
 
+      let isMissileBursted = false;
+
       function missile() {
         if (stageNum === 5) {
           requestAnimationFrame(missile);
-          if (timer % 180 === 0) {
-            const missile = new Missile({
-              imgSrc: "img/assets/missile_vertical.png",
-              position: {
-                x: tile * 8,
-                y: tile * 1 + 8,
-              },
-              direction: "vertical",
-            });
-            missiles.push(missile);
-          } else cancelAnimationFrame(missile);
+          if (isMissileBursted) {
+            if (timer % 10 === 0) {
+              const missile = new Missile({
+                imgSrc: "img/assets/missile_vertical.png",
+                position: {
+                  x: tile * 8,
+                  y: tile * 1 + 8,
+                },
+                direction: "vertical",
+              });
+              missiles.push(missile);
+            }
+          } else {
+            setTimeout(() => {
+              isMissileBursted = true;
+              setTimeout(() => {
+                isMissileBursted = false;
+              }, 3000);
+            }, 3000);
+          }
         }
       }
+
       missile();
     },
   },

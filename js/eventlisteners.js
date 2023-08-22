@@ -1,3 +1,6 @@
+
+// Keyboard events
+
 let keys = {
   ArrowLeft: false,
   ArrowRight: false,
@@ -45,4 +48,50 @@ document.addEventListener("keyup", (e) => {
     player.vy = 0;
     player.switchSprite("idleDown");
   }
+});
+
+// Button click events
+
+start.addEventListener("click", () => {
+  canvas.classList.toggle("show");
+  titleScreen.classList.toggle("show");
+  gameStart.muted = true;
+  if (soundOn.style.display === "block") {
+    theme.play();
+    theme.loop = true;
+  }
+});
+
+howToPLAY.addEventListener("click", () => {
+  howToScreen.classList.toggle("show");
+  titleScreen.classList.toggle("show");
+});
+
+back.addEventListener("click", () => {
+  howToScreen.classList.toggle("show");
+  titleScreen.classList.toggle("show");
+});
+
+// Sound events
+
+soundOn.addEventListener("click", () => {
+  soundOn.style.display = "none";
+  soundOff.style.display = "block";
+  gameStart.muted = true;
+});
+
+soundOff.addEventListener("click", () => {
+  soundOff.style.display = "none";
+  soundOn.style.display = "block";
+  gameStart.play();
+  gameStart.muted = false;
+  gameStart.loop = true;
+});
+
+
+tryAgain.addEventListener("click", () => {
+  gameOverScreen.classList.toggle("show");
+  canvas.classList.toggle("show");
+
+  init();
 });

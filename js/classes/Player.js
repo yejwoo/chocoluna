@@ -70,10 +70,8 @@ class Player {
             blockY + 24 > this.position.y &&
             blockY < this.position.y + 28
           ) {
-            if (keys.ArrowLeft) this.position.x = blockX + 24;
-            else if (keys.ArrowRight) this.position.x = blockX - 24;
-            else if (keys.ArrowUp) this.position.y = blockY + 24;
-            else if (keys.ArrowDown) this.position.y = blockY - 28;
+            this.position.x -= this.vx;
+            this.position.y -= this.vy;
           }
         }
       });
@@ -88,8 +86,10 @@ class Player {
         missile.position.y + missile.height - 9 > this.position.y &&
         missile.position.y + 9 < this.position.y + this.height
       ) {
+        hit.play()
         missiles.splice(i, 1);
         this.minusLife();
+        this.switchSprite("damaged")
       }
     });
   }
@@ -126,19 +126,41 @@ class Player {
       goal.position.y + 16 >= this.position.y &&
       score === stageNum
     ) {
-      stages[stageNum].clearStage = true;
-      stageNum++;
-      gsap.to(overlay, {
-        opacity: 1,
-        onComplete: () => {
-          stages[stageNum].init();
-          gsap.to(overlay, {
-            opacity: 0,
-          });
-        },
-      });
-    }
+      if(stageNum!== 5) {
+        stages[stageNum].clearStage = true;
+        stageNum++;
+        gsap.to(overlay, {
+          opacity: 1,
+          onComplete: () => {
+            stages[stageNum].init();
+            gsap.to(overlay, {
+              opacity: 0,
+            });
+          },
+        });
+      }
+      else {
+        gsap.to(overlay, {
+          opacity: 1,
+          onComplete: () => {
+            stages[stageNum].init();
+            gsap.to(overlay, {
+              opacity: 0,
+            });
+          },
+        });
+        gsap.to(overlay, {
+          opacity: 0,
+          onComplete: () => {
+            stages[stageNum].init();
+            gsap.to(overlay, {
+              opacity: 1,
+            });
+          },
+        });
+      }
   }
+}
 
   minusLife() {
     for (let i = 0; i < lives.length; i++) {
@@ -148,11 +170,13 @@ class Player {
         lives[i].status.empty.isEmpty = true;
         lives[i].status.filled.isFilled = false;
       }
+      minus.play();
       break;
     }
     if (lives[2].status.empty.isEmpty) {
-      gameOver.style.display = "block";
-      GAME_OVER = true;
+      gameOver = true;
+      gameOverScreen.classList.toggle("show");
+      canvas.classList.toggle("show");
     }
   }
 
@@ -163,6 +187,7 @@ class Player {
         lives[i].swipeFilled();
         lives[i].status.empty.isEmpty = false;
         lives[i].status.filled.isFilled = true;
+        plus.play();
       }
       break;
     }

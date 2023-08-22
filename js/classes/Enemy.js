@@ -106,7 +106,8 @@ class Enemy extends Objects {
         break;
       }
       if (lives[2].status.empty.isEmpty) {
-        gameOver.style.display = "block";
+        gameOverScreen.classList.toggle("show");
+        canvas.classList.toggle("show");
       }
     }
   }

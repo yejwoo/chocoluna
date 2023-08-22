@@ -4,10 +4,16 @@
 }
 
 :root {
-  --dark-brown: #160900;
   --brown: #3d200c;
-  --yellow: #ffd56a;
-  --dark-yellow: #fdba12;
+  --dark-brown: #160900;
+  --yellow: #ffd92e;
+  --dark-yellow: #ffc400;
+  --shadow: #ff9100;
+  --text: #720103;
+}
+body {
+  margin: 0;
+  background-image: url('img/web/bg.png');
 }
 
 * {
@@ -25,29 +31,32 @@ h3 {
   color: white;
 }
 
+
 button {
-  margin: 4px 0;
+  margin-top: 16px;
   border: none;
-  width: 160px;
-  padding: 8px;
+  width: 150px;
+  height: 28px;
   font-size: 14px;
-  border-radius: 16px;
+  border-radius: 12px;
   background: var(--yellow);
-  color: var(--dark-brown);
+  color: var(--text);
+  box-shadow: 0 4px var(--shadow);
 }
 
 button:hover {
-  background: var(--dark-yellow);
   cursor: pointer;
 }
 
-body {
-  margin: 0;
-  background-image: url('img/web/bg.png');
+button:active {
+  margin-top: 20px;
+  height: 24px;
+  background-color: var(--dark-yellow);
 }
 
+
+
 canvas {
-  display: none;
   margin: 280px auto 0;
   transform: scale(2);
   width: 320px;
@@ -69,24 +78,54 @@ h1 {
   background: var(--dark-brown);
 }
 
-.popup div {
-  margin-top: 24px;
-}
-
-.how-to-play,
-.game-over {
-  display: none;
-}
-
-.title-screen img {
+.title-screen .popup>img {
   margin-top: 64px;
+}
+
+button .wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+}
+
+.wrap img {
+  margin: -2px 4px 0 0;
+}
+
+.buttons {
+  margin-top: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.audio {
+  margin: 24px 0 0 10px;
+  image-rendering: pixelated;
 }
 
 .how-to-play h3 {
   margin: 40px 0;
 }
 
-.how-to-play button {
-  margin-top: 20px;
+.game-over .popup>img {
+  margin: 72px 0 0;
 }
 
+.game-over button span{
+  margin: 2px 0;
+}
+
+.title-screen,
+.how-to-play,
+.game-over,
+canvas
+ {
+  display: none;
+}
+
+.show {
+  display: block;
+}
