@@ -13,6 +13,8 @@ class Player {
       y: position.y,
     };
 
+ 
+
     this.vx = 0;
     this.vy = 0;
     this.timer = 0;
@@ -32,30 +34,34 @@ class Player {
   }
 
   update() {
-    this.timer++;
-    if (this.timer % 13 === 0) this.frame++;
-    if (this.frame > 3) this.frame = 0;
+   
+      this.timer++;
+      if (this.timer % 13 === 0) this.frame++;
+      if (this.frame > 3) this.frame = 0;
 
-    if (this.position.y < 0) {
-      this.position.y = 0;
-    }
-    if (this.position.y > 227) {
-      this.position.y = 227;
-    }
-    if (this.position.x < -8) {
-      this.position.x = -8;
-    }
-    if (this.position.x > canvas.width - this.width) {
-      this.position.x = canvas.width - this.width;
-    }
+      if (this.position.y < 0) {
+        this.position.y = 0;
+      }
+      if (this.position.y > 227) {
+        this.position.y = 227;
+      }
+      if (this.position.x < -8) {
+        this.position.x = -8;
+      }
+      if (this.position.x > canvas.width - this.width) {
+        this.position.x = canvas.width - this.width;
+      }
 
-    this.position.x += this.vx;
-    this.position.y += this.vy;
+      this.position.x += this.vx;
+      this.position.y += this.vy;
 
-    this.blockCollisionCheck();
-    this.missileCollisionCheck();
-    this.getScoreCheck();
-    this.getToGoalCheck();
+      this.blockCollisionCheck();
+      this.missileCollisionCheck();
+      this.getScoreCheck();
+      this.getToGoalCheck();
+  
+
+     
   }
 
   blockCollisionCheck() {
@@ -86,10 +92,10 @@ class Player {
         missile.position.y + missile.height - 9 > this.position.y &&
         missile.position.y + 9 < this.position.y + this.height
       ) {
-        hit.play()
+        hit.play();
         missiles.splice(i, 1);
         this.minusLife();
-        this.switchSprite("damaged")
+        this.switchSprite("damaged");
       }
     });
   }
@@ -126,7 +132,7 @@ class Player {
       goal.position.y + 16 >= this.position.y &&
       score === stageNum
     ) {
-      if(stageNum!== 5) {
+      if (stageNum !== 5) {
         stages[stageNum].clearStage = true;
         stageNum++;
         gsap.to(overlay, {
@@ -138,29 +144,11 @@ class Player {
             });
           },
         });
+      } else {
+        stages[stageNum].clearStage = true;
       }
-      else {
-        gsap.to(overlay, {
-          opacity: 1,
-          onComplete: () => {
-            stages[stageNum].init();
-            gsap.to(overlay, {
-              opacity: 0,
-            });
-          },
-        });
-        gsap.to(overlay, {
-          opacity: 0,
-          onComplete: () => {
-            stages[stageNum].init();
-            gsap.to(overlay, {
-              opacity: 1,
-            });
-          },
-        });
-      }
+    }
   }
-}
 
   minusLife() {
     for (let i = 0; i < lives.length; i++) {
@@ -174,9 +162,7 @@ class Player {
       break;
     }
     if (lives[2].status.empty.isEmpty) {
-      gameOver = true;
-      gameOverScreen.classList.toggle("show");
-      canvas.classList.toggle("show");
+      gameOver();
     }
   }
 

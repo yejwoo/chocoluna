@@ -29,15 +29,18 @@ let backgroundStage,
   donutPlusLife,
   missile,
   missileCollisionBlocks,
-  collisionBlocks;
+  collisionBlocks,
+  playerStartPosition;
 
 let stages = {
   1: {
     clearStage: false,
+    playerStartPosition: {
+      x: 32,
+      y: 224,
+    },
     init: () => {
       score = 0;
-
-     
 
       backgroundStage = new Stage({
         imgSrc: "img/map/stage1.png",
@@ -49,6 +52,9 @@ let stages = {
           y: tile * 0,
         },
       };
+
+
+      
 
       collisionBlocks = map1.chunk();
 
@@ -149,6 +155,10 @@ let stages = {
   },
   2: {
     clearStage: false,
+    playerStartPosition: {
+      x: 256,
+      y: 224,
+    },
     init: () => {
       (missiles = []),
         (enemies = []),
@@ -301,6 +311,10 @@ let stages = {
   },
   3: {
     clearStage: false,
+    playerStartPosition: {
+      x: 64,
+      y: 224,
+    },
     init: () => {
       (missiles = []),
         (enemies = []),
@@ -495,6 +509,10 @@ let stages = {
   },
   4: {
     clearStage: false,
+    playerStartPosition: {
+      x: 128,
+      y: 224,
+    },
     init: () => {
       (missiles = []),
         (enemies = []),
@@ -729,6 +747,10 @@ let stages = {
   },
   5: {
     clearStage: false,
+    playerStartPosition: {
+      x: 288,
+      y: 224,
+    },
     init: () => {
       (missiles = []),
         (enemies = []),

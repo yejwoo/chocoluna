@@ -28,6 +28,12 @@ class Status {
     this.img = this.status["filled"].img;
   }
 
+  update() {
+    this.swipeFilled();
+    this.status["filled"].isFilled = true;
+    this.status["empty"].isEmpty = false;
+  }
+
   draw() {
     c.drawImage(
       this.img,

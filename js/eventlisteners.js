@@ -1,4 +1,3 @@
-
 // Keyboard events
 
 let keys = {
@@ -88,10 +87,18 @@ soundOff.addEventListener("click", () => {
   gameStart.loop = true;
 });
 
-
 tryAgain.addEventListener("click", () => {
+  // after click "TRY AGAIN" button
+  // close gameOverScreen and show canvas
   gameOverScreen.classList.toggle("show");
   canvas.classList.toggle("show");
 
-  init();
+  // reset player position
+  player.position.x = stages[stageNum].playerStartPosition.x;
+  player.position.y = stages[stageNum].playerStartPosition.y;
+  player.switchSprite("idleDown");
+
+  // GAME_OVER equals false
+  GAME_OVER = false;
+  
 });

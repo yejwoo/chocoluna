@@ -10,12 +10,10 @@ const velocity = 1;
 let timer = 0;
 let score = 0;
 let stageNum = 1;
-let gameOver = false;
-let replay = false;
+let GAME_OVER = false;
+let REPLAY = false;
 
 // main contents
-
-
 const life1 = new Status({
   imgSrc: "img/assets/life_filled.png",
   position: {
@@ -70,6 +68,8 @@ const life3 = new Status({
   },
 });
 
+lives.push(life1, life2, life3);
+
 const donutScore= new Status({
   imgSrc: "img/assets/donut_S.png",
   position: {
@@ -86,7 +86,7 @@ const endingImg = new Stage({
   imgSrc: "img/web/ending_screen.png",
 });
 
-lives.push(life1, life2, life3);
+
 
 // Buttons and popups
 
