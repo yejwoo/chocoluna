@@ -11,19 +11,21 @@ class Missile extends Objects {
   }
 
   update() {
-    if (this.direction === "vertical") {
-      this.position.y += this.vy;
-      if(stageNum === 5) {
-        this.vy+=0.05;
+    if(clickStart) {      
+      if (this.direction === "vertical") {
+        this.position.y += this.vy;
+        if(stageNum === 5) {
+          this.vy+=0.05;
+        }
+  
+      } else if (this.direction === "horizontal") {
+        this.position.x += this.vx;
+        if(stageNum === 4) {
+          this.vx+=0.05;
+        }
       }
-
-    } else if (this.direction === "horizontal") {
-      this.position.x += this.vx;
-      if(stageNum === 4) {
-        this.vx+=0.05;
-      }
-    }
-    this.blockCollisionCheck();
+      this.blockCollisionCheck();
+    }   
   }
 
   blockCollisionCheck() {

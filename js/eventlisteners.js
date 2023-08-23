@@ -8,24 +8,27 @@ let keys = {
 };
 
 document.addEventListener("keydown", (e) => {
-  keys[e.code] = true;
+  if(clickStart) {    
+    keys[e.code] = true;
 
-  if (keys.ArrowLeft) {
-    player.vx = -velocity;
-    player.switchSprite("walkLeft");
-  }
-  if (keys.ArrowRight) {
-    player.vx = velocity;
-    player.switchSprite("walkRight");
-  }
-  if (keys.ArrowUp) {
-    player.vy = -velocity;
-    player.switchSprite("walkUp");
-  }
-  if (keys.ArrowDown) {
-    player.vy = velocity;
-    player.switchSprite("walkDown");
-  }
+    if (keys.ArrowLeft) {
+      player.vx = -velocity;
+      player.switchSprite("walkLeft");
+    }
+    if (keys.ArrowRight) {
+      player.vx = velocity;
+      player.switchSprite("walkRight");
+    }
+    if (keys.ArrowUp) {
+      player.vy = -velocity;
+      player.switchSprite("walkUp");
+    }
+    if (keys.ArrowDown) {
+      player.vy = velocity;
+      player.switchSprite("walkDown");
+    }
+  }  
+ 
 });
 
 document.addEventListener("keyup", (e) => {
@@ -51,54 +54,43 @@ document.addEventListener("keyup", (e) => {
 
 // Button click events
 
-start.addEventListener("click", () => {
+let clickStart = false;
+startBtn.addEventListener("click", () => {
+  clickStart = true;
+  
   canvas.classList.toggle("show");
   titleScreen.classList.toggle("show");
-  gameStart.muted = true;
+  gameStartSong.muted = true;
   if (soundOn.style.display === "block") {
-    theme.play();
-    theme.loop = true;
+    themeSong.play();
+    themeSong.loop = true;
   }
 });
 
-howToPLAY.addEventListener("click", () => {
+howToPLAYBtn.addEventListener("click", () => {
   howToScreen.classList.toggle("show");
   titleScreen.classList.toggle("show");
 });
 
-back.addEventListener("click", () => {
+backBtn.addEventListener("click", () => {
   howToScreen.classList.toggle("show");
   titleScreen.classList.toggle("show");
 });
+
 
 // Sound events
 
 soundOn.addEventListener("click", () => {
   soundOn.style.display = "none";
   soundOff.style.display = "block";
-  gameStart.muted = true;
+  gameStartSong.muted = true;
 });
 
 soundOff.addEventListener("click", () => {
   soundOff.style.display = "none";
   soundOn.style.display = "block";
-  gameStart.play();
-  gameStart.muted = false;
-  gameStart.loop = true;
+  gameStartSong.play();
+  gameStartSong.muted = false;
+  gameStartSong.loop = true;
 });
 
-tryAgain.addEventListener("click", () => {
-  // after click "TRY AGAIN" button
-  // close gameOverScreen and show canvas
-  gameOverScreen.classList.toggle("show");
-  canvas.classList.toggle("show");
-
-  // reset player position
-  player.position.x = stages[stageNum].playerStartPosition.x;
-  player.position.y = stages[stageNum].playerStartPosition.y;
-  player.switchSprite("idleDown");
-
-  // GAME_OVER equals false
-  GAME_OVER = false;
-  
-});

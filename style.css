@@ -121,6 +121,7 @@ button .wrap {
 .title-screen,
 .how-to-play,
 .game-over,
+.game-end,
 canvas
  {
   display: none;

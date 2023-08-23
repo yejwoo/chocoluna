@@ -1,17 +1,3 @@
-class Stage {
-  constructor({ imgSrc }) {
-    this.img = new Image();
-    this.img.src = imgSrc;
-    this.img.onload = () => {
-      this.draw();
-    };
-  }
-
-  draw() {
-    c.drawImage(this.img, 0, 0);
-  }
-}
-
 let backgroundStage,
   enemies = [],
   donuts = [],
@@ -24,8 +10,7 @@ let backgroundStage,
   enemy3,
   enemy4,
   donut,
-  donutMinusLife1,
-  donutMinusLife2,
+  donutMinusLife,
   donutPlusLife,
   missile,
   missileCollisionBlocks,
@@ -34,7 +19,6 @@ let backgroundStage,
 
 let stages = {
   1: {
-    clearStage: false,
     playerStartPosition: {
       x: 32,
       y: 224,
@@ -52,9 +36,6 @@ let stages = {
           y: tile * 0,
         },
       };
-
-
-      
 
       collisionBlocks = map1.chunk();
 
@@ -154,7 +135,6 @@ let stages = {
     },
   },
   2: {
-    clearStage: false,
     playerStartPosition: {
       x: 256,
       y: 224,
@@ -310,7 +290,6 @@ let stages = {
     },
   },
   3: {
-    clearStage: false,
     playerStartPosition: {
       x: 64,
       y: 224,
@@ -476,7 +455,7 @@ let stages = {
             y: 0,
           },
         })),
-        (donutMinusLife1 = new Objects({
+        (donutMinusLife = new Objects({
           id: "minus",
           imgSrc: "img/assets/donut_minus.png",
           position: {
@@ -485,7 +464,7 @@ let stages = {
           },
         })),
         enemies.push(enemy1, enemy2, enemy3);
-      donuts.push(donutPlusLife, donutMinusLife1, donut);
+      donuts.push(donutPlusLife, donutMinusLife, donut);
 
       function missile() {
         if (stageNum === 3) {
@@ -508,7 +487,6 @@ let stages = {
     },
   },
   4: {
-    clearStage: false,
     playerStartPosition: {
       x: 128,
       y: 224,
@@ -695,7 +673,7 @@ let stages = {
             y: 4,
           },
         })),
-        (donutMinusLife1 = new Objects({
+        (donutMinusLife = new Objects({
           id: "minus",
           imgSrc: "img/assets/donut_minus.png",
           position: {
@@ -711,7 +689,7 @@ let stages = {
             y: 4,
           },
         })),
-        donuts.push(donutMinusLife1, donutPlusLife, donut);
+        donuts.push(donutMinusLife, donutPlusLife, donut);
       enemies.push(enemy1, enemy2, enemy3, enemy4);
 
       let isMissileBursted = false;
@@ -927,7 +905,7 @@ let stages = {
           imgSrc: "img/assets/donut_minus.png",
           position: {
             x: 6,
-            y: 3,
+            y: 5,
           },
         })),
         (donutPlusLife = new Objects({
@@ -935,7 +913,7 @@ let stages = {
           imgSrc: "img/assets/donut_plus.png",
           position: {
             x: 6,
-            y: 5,
+            y: 3,
           },
         })),
         donuts.push(donutPlusLife, donutMinusLife, donut);

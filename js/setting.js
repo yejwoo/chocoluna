@@ -7,11 +7,11 @@ canvas.height = tile * 9;
 
 // numbers
 const velocity = 1;
+let animation;
 let timer = 0;
-let score = 0;
-let stageNum = 1;
+let score = 1;
+let stageNum = 4;
 let GAME_OVER = false;
-let REPLAY = false;
 
 // main contents
 const life1 = new Status({
@@ -82,20 +82,19 @@ const overlay = {
   opacity: 0,
 };
 
-const endingImg = new Stage({
-  imgSrc: "img/web/ending_screen.png",
-});
-
-
-
-// Buttons and popups
-
-const start = document.querySelectorAll(".title-screen button")[0];
-const howToPLAY = document.querySelectorAll(".title-screen button")[1];
-const tryAgain = document.querySelector(".game-over button");
-const back = document.querySelector(".how-to-play button");
-const howToScreen = document.querySelector(".how-to-play");
+// Screens
 const titleScreen = document.querySelector(".title-screen");
+const howToScreen = document.querySelector(".how-to-play");
 const gameOverScreen = document.querySelector(".game-over");
+const gameEndScreen = document.querySelector(".game-end");
+
+// Buttons
+const startBtn = document.querySelectorAll(".title-screen button")[0];
+const howToPLAYBtn = document.querySelectorAll(".title-screen button")[1];
+const replayOnGameOverBtn = document.querySelector(".game-over button");
+const replayOnGameEndBtn = document.querySelector(".game-end button");
+const backBtn = document.querySelector(".how-to-play button");
+
+// Sound
 const soundOn = document.querySelector(".audio img:first-child");
 const soundOff = document.querySelector(".audio img:last-child");

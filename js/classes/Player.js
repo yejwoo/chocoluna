@@ -13,8 +13,6 @@ class Player {
       y: position.y,
     };
 
- 
-
     this.vx = 0;
     this.vy = 0;
     this.timer = 0;
@@ -34,34 +32,30 @@ class Player {
   }
 
   update() {
-   
-      this.timer++;
-      if (this.timer % 13 === 0) this.frame++;
-      if (this.frame > 3) this.frame = 0;
+    this.timer++;
+    if (this.timer % 13 === 0) this.frame++;
+    if (this.frame > 3) this.frame = 0;
 
-      if (this.position.y < 0) {
-        this.position.y = 0;
-      }
-      if (this.position.y > 227) {
-        this.position.y = 227;
-      }
-      if (this.position.x < -8) {
-        this.position.x = -8;
-      }
-      if (this.position.x > canvas.width - this.width) {
-        this.position.x = canvas.width - this.width;
-      }
+    if (this.position.y < 0) {
+      this.position.y = 0;
+    }
+    if (this.position.y > 227) {
+      this.position.y = 227;
+    }
+    if (this.position.x < -8) {
+      this.position.x = -8;
+    }
+    if (this.position.x > canvas.width - this.width) {
+      this.position.x = canvas.width - this.width;
+    }
 
-      this.position.x += this.vx;
-      this.position.y += this.vy;
+    this.position.x += this.vx;
+    this.position.y += this.vy;
 
-      this.blockCollisionCheck();
-      this.missileCollisionCheck();
-      this.getScoreCheck();
-      this.getToGoalCheck();
-  
-
-     
+    this.blockCollisionCheck();
+    this.missileCollisionCheck();
+    this.getScoreCheck();
+    this.clearStageCheck();
   }
 
   blockCollisionCheck() {
@@ -125,7 +119,7 @@ class Player {
     }
   }
 
-  getToGoalCheck() {
+  clearStageCheck() {
     if (
       goal.position.x - 8 <= this.position.x &&
       goal.position.x + tile >= this.position.x + 24 &&
@@ -146,6 +140,11 @@ class Player {
         });
       } else {
         stages[stageNum].clearStage = true;
+        cancelAnimationFrame(animation);
+        themeSong.muted = true;
+        gameEndScreen.classList.toggle("show");
+        canvas.classList.toggle("show")
+        // 엔딩 사운드 or song 호출
       }
     }
   }
