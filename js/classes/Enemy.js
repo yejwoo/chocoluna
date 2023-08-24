@@ -7,7 +7,7 @@ class Enemy extends Objects {
     this.id = id;
     this.img.onload = () => {
       this.draw();
-      this.width = this.img.width / 4;
+      this.width = this.img.width / 6;
       this.height = this.img.height;
     };
 
@@ -20,9 +20,8 @@ class Enemy extends Objects {
     this.timer++;    
     this.collisionCheck();
 
-    if (this.timer % 13 === 0) this.frame++;
-    if (this.frame > 3) this.frame = 0;
-
+    if (this.timer % 10 === 0) this.frame++;
+    if (this.frame > 5) this.frame = 0;
     if (this.moveDirection.rotate) {
       this.moveRotation();
     } else if (this.moveDirection.vertical) {
@@ -55,6 +54,7 @@ class Enemy extends Objects {
   }
 
   moveRotation() {
+    
     if (
       this.position.x === enemyCollisionBlocks.rotate[3].x &&
       this.position.y >= enemyCollisionBlocks.rotate[3].y + tile &&
@@ -88,10 +88,10 @@ class Enemy extends Objects {
 
   collisionCheck() {
     if (
-      this.position.x + this.width - 2 > player.position.x + 4 &&
-      this.position.x + 2 < player.position.x + player.width - 2 &&
-      this.position.y + this.height - 4 > player.position.y &&
-      this.position.y + 4 < player.position.y + player.height
+      this.position.x + this.width - 6 > player.position.x + 4 &&
+      this.position.x + 6 < player.position.x + player.width - 4 &&
+      this.position.y + this.height - 3 > player.position.y &&
+      this.position.y + 3 < player.position.y + player.height
     ) {
       player.position.x = player.enemyCollisionPosition[this.id].x
       player.position.y = player.enemyCollisionPosition[this.id].y

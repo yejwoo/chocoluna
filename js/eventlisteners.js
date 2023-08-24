@@ -80,6 +80,7 @@ backBtn.addEventListener("click", () => {
 
 // Sound events
 
+
 soundOn.addEventListener("click", () => {
   soundOn.style.display = "none";
   soundOff.style.display = "block";

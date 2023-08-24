@@ -1,6 +1,6 @@
 let backgroundStage,
   enemies = [],
-  donuts = [],
+  chocos = [],
   missiles = [],
   lives = [],
   goal,
@@ -9,9 +9,9 @@ let backgroundStage,
   enemy2,
   enemy3,
   enemy4,
-  donut,
-  donutMinusLife,
-  donutPlusLife,
+  choco,
+  chocoMinusLife,
+  chocoPlusLife,
   missile,
   missileCollisionBlocks,
   collisionBlocks,
@@ -91,7 +91,7 @@ let stages = {
 
       (enemy1 = new Enemy({
         id: 1,
-        imgSrc: "img/sprite/slime1.png",
+        imgSrc: "img/sprite/missile_bear.png",
         position: {
           x: 2,
           y: 1,
@@ -104,22 +104,22 @@ let stages = {
       })),
         enemies.push(enemy1);
 
-      (donut = new Objects({
+      (choco = new Objects({
         id: "score",
-        imgSrc: "img/assets/donut_L.png",
+        imgSrc: "img/sprite/choco_sprite.png",
         position: {
           x: 8,
           y: 4,
         },
       })),
-        donuts.push(donut);
+        chocos.push(choco);
 
       function missile() {
         if (stageNum === 1) {
           requestAnimationFrame(missile);
-          if (timer % 80 === 0) {
+          if (timer % 90 === 0) {
             const missile = new Missile({
-              imgSrc: "img/assets/missile_vertical.png",
+              imgSrc: "img/assets/missile.png",
               position: {
                 x: tile * 2,
                 y: tile * 1 + 8,
@@ -142,7 +142,7 @@ let stages = {
     init: () => {
       (missiles = []),
         (enemies = []),
-        (donuts = []),
+        (chocos = []),
         (backgroundStage = new Stage({
           imgSrc: "img/map/stage2.png",
         }));
@@ -233,7 +233,7 @@ let stages = {
 
       enemy1 = new Enemy({
         id: 1,
-        imgSrc: "img/sprite/slime1.png",
+        imgSrc: "img/sprite/dance_bear.png",
         position: {
           x: 7,
           y: 3,
@@ -247,7 +247,7 @@ let stages = {
 
       (enemy2 = new Enemy({
         id: 2,
-        imgSrc: "img/sprite/slime2.png",
+        imgSrc: "img/sprite/missile_bear.png",
         position: {
           x: 0,
           y: 5,
@@ -258,23 +258,24 @@ let stages = {
           horizontal: false,
         },
       })),
-        (donut = new Objects({
+
+        (choco = new Objects({
           id: "score",
-          imgSrc: "img/assets/donut_L.png",
+          imgSrc: "img/sprite/choco_sprite.png",
           position: {
             x: 6,
             y: 6,
           },
         })),
         enemies.push(enemy1, enemy2);
-      donuts.push(donut);
+      chocos.push(choco);
 
       function missile() {
         if (stageNum === 2) {
           requestAnimationFrame(missile);
           if (timer % 90 === 0) {
             const missile = new Missile({
-              imgSrc: "img/assets/missile_horizontal.png",
+              imgSrc: "img/assets/missile.png",
               position: {
                 x: tile * 0 + 8,
                 y: tile * 5,
@@ -297,7 +298,7 @@ let stages = {
     init: () => {
       (missiles = []),
         (enemies = []),
-        (donuts = []),
+        (chocos = []),
         (backgroundStage = new Stage({
           imgSrc: "img/map/stage3.png",
         }));
@@ -402,7 +403,7 @@ let stages = {
 
       (enemy1 = new Enemy({
         id: 1,
-        imgSrc: "img/sprite/slime2.png",
+        imgSrc: "img/sprite/dance_bear.png",
         position: {
           x: 5,
           y: 5,
@@ -415,7 +416,7 @@ let stages = {
       })),
         (enemy2 = new Enemy({
           id: 2,
-          imgSrc: "img/sprite/slime3.png",
+          imgSrc: "img/sprite/jump_bear.png",
           position: {
             x: 8,
             y: 7,
@@ -428,7 +429,7 @@ let stages = {
         })),
         (enemy3 = new Enemy({
           id: 3,
-          imgSrc: "img/sprite/slime1.png",
+          imgSrc: "img/sprite/missile_bear.png",
           position: {
             x: 0,
             y: 0,
@@ -439,39 +440,39 @@ let stages = {
             horizontal: false,
           },
         }));
-      (donut = new Objects({
+      (choco = new Objects({
         id: "score",
-        imgSrc: "img/assets/donut_L.png",
+        imgSrc: "img/sprite/choco_sprite.png",
         position: {
           x: 2,
           y: 1,
         },
       })),
-        (donutPlusLife = new Objects({
+        (chocoPlusLife = new Objects({
           id: "plus",
-          imgSrc: "img/assets/donut_plus.png",
+          imgSrc: "img/sprite/life_plus.png",
           position: {
             x: 7,
             y: 0,
           },
         })),
-        (donutMinusLife = new Objects({
+        (chocoMinusLife = new Objects({
           id: "minus",
-          imgSrc: "img/assets/donut_minus.png",
+          imgSrc: "img/sprite/life_minus.png",
           position: {
             x: 9,
             y: 0,
           },
         })),
         enemies.push(enemy1, enemy2, enemy3);
-      donuts.push(donutPlusLife, donutMinusLife, donut);
+      chocos.push(chocoPlusLife, chocoMinusLife, choco);
 
       function missile() {
         if (stageNum === 3) {
           requestAnimationFrame(missile);
           if (timer % 200 === 0) {
             const missile = new Missile({
-              imgSrc: "img/assets/missile_vertical.png",
+              imgSrc: "img/assets/missile.png",
               position: {
                 x: tile * 0,
                 y: tile * 0 + 8,
@@ -494,7 +495,7 @@ let stages = {
     init: () => {
       (missiles = []),
         (enemies = []),
-        (donuts = []),
+        (chocos = []),
         (backgroundStage = new Stage({
           imgSrc: "img/map/stage4.png",
         }));
@@ -613,7 +614,7 @@ let stages = {
 
       enemy1 = new Enemy({
         id: 1,
-        imgSrc: "img/sprite/slime1.png",
+        imgSrc: "img/sprite/missile_bear.png",
         position: {
           x: 1,
           y: 6,
@@ -627,7 +628,7 @@ let stages = {
 
       enemy2 = new Enemy({
         id: 2,
-        imgSrc: "img/sprite/slime1.png",
+        imgSrc: "img/sprite/jump_bear2.png",
         position: {
           x: 2,
           y: 0,
@@ -641,7 +642,7 @@ let stages = {
 
       (enemy3 = new Enemy({
         id: 3,
-        imgSrc: "img/sprite/slime2.png",
+        imgSrc: "img/sprite/dance_bear.png",
         position: {
           x: 5,
           y: 2,
@@ -654,7 +655,7 @@ let stages = {
       })),
         (enemy4 = new Enemy({
           id: 4,
-          imgSrc: "img/sprite/slime3.png",
+          imgSrc: "img/sprite/jump_bear.png",
           position: {
             x: 9,
             y: 7,
@@ -665,31 +666,31 @@ let stages = {
             horizontal: false,
           },
         })),
-        (donut = new Objects({
+        (choco = new Objects({
           id: "score",
-          imgSrc: "img/assets/donut_L.png",
+          imgSrc: "img/sprite/choco_sprite.png",
           position: {
             x: 4,
             y: 4,
           },
         })),
-        (donutMinusLife = new Objects({
+        (chocoMinusLife = new Objects({
           id: "minus",
-          imgSrc: "img/assets/donut_minus.png",
+          imgSrc: "img/sprite/life_minus.png",
           position: {
             x: 5,
             y: 5,
           },
         })),
-        (donutPlusLife = new Objects({
+        (chocoPlusLife = new Objects({
           id: "plus",
-          imgSrc: "img/assets/donut_plus.png",
+          imgSrc: "img/sprite/life_plus.png",
           position: {
             x: 6,
             y: 4,
           },
         })),
-        donuts.push(donutMinusLife, donutPlusLife, donut);
+        chocos.push(chocoMinusLife, chocoPlusLife, choco);
       enemies.push(enemy1, enemy2, enemy3, enemy4);
 
       let isMissileBursted = false;
@@ -700,7 +701,7 @@ let stages = {
           if (isMissileBursted) {
             if (timer % 10 === 0) {
               const missile = new Missile({
-                imgSrc: "img/assets/missile_horizontal.png",
+                imgSrc: "img/assets/missile.png",
                 position: {
                   x: tile * 1 + 8,
                   y: tile * 6,
@@ -732,7 +733,7 @@ let stages = {
     init: () => {
       (missiles = []),
         (enemies = []),
-        (donuts = []),
+        (chocos = []),
         (backgroundStage = new Stage({
           imgSrc: "img/map/stage5.png",
         }));
@@ -841,7 +842,7 @@ let stages = {
 
       enemy = new Enemy({
         id: 1,
-        imgSrc: "img/sprite/slime1.png",
+        imgSrc: "img/sprite/missile_bear.png",
         position: {
           x: 8,
           y: 1,
@@ -854,7 +855,7 @@ let stages = {
       });
       (enemy2 = new Enemy({
         id: 2,
-        imgSrc: "img/sprite/slime3.png",
+        imgSrc: "img/sprite/dance_bear.png",
         position: {
           x: 0,
           y: 1,
@@ -867,7 +868,7 @@ let stages = {
       })),
         (enemy3 = new Enemy({
           id: 3,
-          imgSrc: "img/sprite/slime2.png",
+          imgSrc: "img/sprite/jump_bear.png",
           position: {
             x: 0,
             y: 6,
@@ -880,7 +881,7 @@ let stages = {
         })),
         (enemy4 = new Enemy({
           id: 4,
-          imgSrc: "img/sprite/slime1.png",
+          imgSrc: "img/sprite/jump_bear2.png",
           position: {
             x: 5,
             y: 7,
@@ -892,31 +893,31 @@ let stages = {
           },
         }));
 
-      (donut = new Objects({
+      (choco = new Objects({
         id: "score",
-        imgSrc: "img/assets/donut_L.png",
+        imgSrc: "img/sprite/choco_sprite.png",
         position: {
           x: 3,
           y: 0,
         },
       })),
-        (donutMinusLife = new Objects({
+        (chocoMinusLife = new Objects({
           id: "minus",
-          imgSrc: "img/assets/donut_minus.png",
+          imgSrc: "img/sprite/life_minus.png",
           position: {
             x: 6,
             y: 5,
           },
         })),
-        (donutPlusLife = new Objects({
+        (chocoPlusLife = new Objects({
           id: "plus",
-          imgSrc: "img/assets/donut_plus.png",
+          imgSrc: "img/sprite/life_plus.png",
           position: {
             x: 6,
             y: 3,
           },
         })),
-        donuts.push(donutPlusLife, donutMinusLife, donut);
+        chocos.push(chocoPlusLife, chocoMinusLife, choco);
       enemies.push(enemy, enemy2, enemy3, enemy4);
 
       let isMissileBursted = false;
@@ -927,7 +928,7 @@ let stages = {
           if (isMissileBursted) {
             if (timer % 10 === 0) {
               const missile = new Missile({
-                imgSrc: "img/assets/missile_vertical.png",
+                imgSrc: "img/assets/missile.png",
                 position: {
                   x: tile * 8,
                   y: tile * 1 + 8,

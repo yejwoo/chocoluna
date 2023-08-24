@@ -65,10 +65,10 @@ class Player {
           const blockX = rowIdx * tile;
           const blockY = colIdx * tile;
           if (
-            blockX + 24 > this.position.x &&
-            blockX < this.position.x + 24 &&
-            blockY + 24 > this.position.y &&
-            blockY < this.position.y + 28
+            blockX + 32 > this.position.x + 6 &&
+            blockX < this.position.x + this.width - 6 &&
+            blockY + 32 > this.position.y + 6 &&
+            blockY < this.position.y + this.height - 2
           ) {
             this.position.x -= this.vx;
             this.position.y -= this.vy;
@@ -95,24 +95,24 @@ class Player {
   }
 
   getScoreCheck() {
-    for (let i = 0; i < donuts.length; i++) {
+    for (let i = 0; i < chocos.length; i++) {
       if (
-        donuts[i].position.x + 16 > this.position.x &&
-        donuts[i].position.x + 16 < this.position.x + tile &&
-        donuts[i].position.y + 16 > this.position.y &&
-        donuts[i].position.y + 16 < this.position.y + tile
+        chocos[i].position.x + 16 > this.position.x &&
+        chocos[i].position.x + 16 < this.position.x + tile &&
+        chocos[i].position.y + 16 > this.position.y &&
+        chocos[i].position.y + 16 < this.position.y + tile
       ) {
-        if (donuts[i].id === "score") {
+        if (chocos[i].id === "score") {
           score++;
-          donuts.splice(i, 1);
+          chocos.splice(i, 1);
           break;
-        } else if (donuts[i].id === "minus") {
+        } else if (chocos[i].id === "minus") {
           this.minusLife();
-          donuts.splice(i, 1);
+          chocos.splice(i, 1);
           break;
-        } else if (donuts[i].id === "plus") {
+        } else if (chocos[i].id === "plus") {
           this.plusLife();
-          donuts.splice(i, 1);
+          chocos.splice(i, 1);
           break;
         }
       }
@@ -185,8 +185,8 @@ class Player {
       0,
       this.width,
       this.height,
-      this.position.x + 4,
-      this.position.y + 4,
+      this.position.x,
+      this.position.y,
       this.width,
       this.height
     );

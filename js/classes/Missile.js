@@ -40,10 +40,10 @@ class Missile extends Objects {
         missiles.splice(i, 1);
       else if (
         (this.direction === "horizontal" &&
-          missile.position.x + missile.width - 9 >
+          missile.position.x + missile.width - 10 >
             missileCollisionBlocks.position.x) ||
         (this.direction === "horizontal" &&
-          missile.position.x + 9 > missileCollisionBlocks.position.x + tile)
+          missile.position.x + 10 > missileCollisionBlocks.position.x + tile)
       )
         missiles.splice(i, 1);
     });

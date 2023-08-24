@@ -4,11 +4,13 @@ function gameOver() {
   canvas.classList.toggle("show");
 }
 
-function drawScore() {
+function drawText() {
+  c.save()
   c.font = "16px Minecraft";
   c.fillStyle = "#3d200c";
   c.fillText(`STAGE  ${stageNum}`, 124, 277);
   c.fillText(`x ${score}`, 282, 277);
+  c.restore()
 }
 
 function putOverlay() {
@@ -20,12 +22,17 @@ function putOverlay() {
 }
 
 function drawBackground() {
-  c.fillStyle = "#dcb198";
+  c.save()
+  c.fillStyle = "white";
   c.fillRect(0, 256, canvas.width, tile);
+  c.restore()
   backgroundStage.draw();
 }
 
 function update() {
+  chocos.forEach((choco) => {
+    choco.update();
+  })
   enemies.forEach((enemy) => {
     enemy.update();
   });
@@ -38,19 +45,15 @@ function update() {
 function render() {
   c.clearRect(0, 0, canvas.width, canvas.height);
   drawBackground();
-  donuts.forEach((donut) => donut.draw());
-  enemies.forEach((enemy) => {
-    enemy.draw();
-  });
-  missiles.forEach((missile) => {
-    missile.draw();
-  });
+  chocos.forEach((choco) => choco.draw());
+  enemies.forEach((enemy) => {enemy.draw();});
+  missiles.forEach((missile) => {missile.draw();});
   player.draw();
   lives.forEach((life) => {
     life.draw();
   });
-  donutScore.draw();
-  drawScore();
+  chocoScore.draw();
+  drawText();
   putOverlay();
 }
 
@@ -64,112 +67,112 @@ function gameOverReset() {
   player.position.y = stages[stageNum].playerStartPosition.y;
   player.switchSprite("idleDown");
 
-  // reset donut
-  if ((donuts = [])) {
+  // reset choco
+  if ((chocos = [])) {
     if (stageNum === 1) {
       score = 0;
 
-      (donut = new Objects({
+      (choco = new Objects({
         id: "score",
-        imgSrc: "img/assets/donut_L.png",
+        imgSrc: "img/sprite/choco_sprite.png",
         position: {
           x: 8,
           y: 4,
         },
       })),
-        donuts.push(donut);
+        chocos.push(choco);
     } else if (stageNum === 2) {
       score = 1;
-      (donut = new Objects({
+      (choco = new Objects({
         id: "score",
-        imgSrc: "img/assets/donut_L.png",
+        imgSrc: "img/sprite/choco_sprite.png",
         position: {
           x: 6,
           y: 6,
         },
       })),
-        donuts.push(donut);
+        chocos.push(choco);
     } else if (stageNum === 3) {
       score = 2;
-      (donut = new Objects({
+      (choco = new Objects({
         id: "score",
-        imgSrc: "img/assets/donut_L.png",
+        imgSrc: "img/sprite/choco_sprite.png",
         position: {
           x: 2,
           y: 1,
         },
       })),
-        (donutPlusLife = new Objects({
+        (chocoPlusLife = new Objects({
           id: "plus",
-          imgSrc: "img/assets/donut_plus.png",
+          imgSrc: "img/sprite/life_plus.png",
           position: {
             x: 7,
             y: 0,
           },
         })),
-        (donutMinusLife = new Objects({
+        (chocoMinusLife = new Objects({
           id: "minus",
-          imgSrc: "img/assets/donut_minus.png",
+          imgSrc: "img/sprite/life_minus.png",
           position: {
             x: 9,
             y: 0,
           },
         })),
-        donuts.push(donut, donutPlusLife, donutMinusLife);
+        chocos.push(choco, chocoPlusLife, chocoMinusLife);
     } else if (stageNum === 4) {
       score = 3;
-      (donut = new Objects({
+      (choco = new Objects({
         id: "score",
-        imgSrc: "img/assets/donut_L.png",
+        imgSrc: "img/sprite/choco_sprite.png",
         position: {
           x: 4,
           y: 4,
         },
       })),
-        (donutMinusLife = new Objects({
+        (chocoMinusLife = new Objects({
           id: "minus",
-          imgSrc: "img/assets/donut_minus.png",
+          imgSrc: "img/sprite/life_minus.png",
           position: {
             x: 5,
             y: 5,
           },
         })),
-        (donutPlusLife = new Objects({
+        (chocoPlusLife = new Objects({
           id: "plus",
-          imgSrc: "img/assets/donut_plus.png",
+          imgSrc: "img/sprite/life_plus.png",
           position: {
             x: 6,
             y: 4,
           },
         })),
-        donuts.push(donutMinusLife, donutPlusLife, donut);
+        chocos.push(chocoMinusLife, chocoPlusLife, choco);
     } else {
       score = 4;
-      (donut = new Objects({
+      (choco = new Objects({
         id: "score",
-        imgSrc: "img/assets/donut_L.png",
+        imgSrc: "img/sprite/choco_sprite.png",
         position: {
           x: 3,
           y: 0,
         },
       })),
-        (donutMinusLife = new Objects({
+        (chocoMinusLife = new Objects({
           id: "minus",
-          imgSrc: "img/assets/donut_minus.png",
+          imgSrc: "img/sprite/life_minus.png",
           position: {
             x: 6,
             y: 3,
           },
         })),
-        (donutPlusLife = new Objects({
+        (chocoPlusLife = new Objects({
           id: "plus",
-          imgSrc: "img/assets/donut_plus.png",
+          imgSrc: "img/sprite/life_plus.png",
           position: {
             x: 6,
             y: 5,
           },
         })),
-        donuts.push(donutPlusLife, donutMinusLife, donut);
+        chocos.push(chocoPlusLife, chocoMinusLife, choco);
     }
   }
 }
@@ -178,7 +181,7 @@ function gameEndReset() {
   lives.forEach((life) => {
     life.update();
   });
-  
+
   stageNum = 1;
   score = 0;
   stages[5].clearStage = false;
@@ -187,7 +190,7 @@ function gameEndReset() {
   gameEndScreen.classList.toggle("show");
   canvas.classList.toggle("show");
   
-  donuts = [];
+  chocos = [];
   enemies = [];
   missiles = [];
 

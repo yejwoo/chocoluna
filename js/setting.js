@@ -9,15 +9,15 @@ canvas.height = tile * 9;
 const velocity = 1;
 let animation;
 let timer = 0;
-let score = 1;
-let stageNum = 4;
+let score = 0;
+let stageNum = 1;
 let GAME_OVER = false;
 
 // main contents
 const life1 = new Status({
   imgSrc: "img/assets/life_filled.png",
   position: {
-    x: 40,
+    x: 44,
     y: 262,
   },
   status: {
@@ -35,7 +35,7 @@ const life1 = new Status({
 const life2 = new Status({
   imgSrc: "img/assets/life_filled.png",
   position: {
-    x: 24,
+    x: 26,
     y: 262,
   },
   status: {
@@ -70,8 +70,8 @@ const life3 = new Status({
 
 lives.push(life1, life2, life3);
 
-const donutScore= new Status({
-  imgSrc: "img/assets/donut_S.png",
+const chocoScore= new Status({
+  imgSrc: "img/assets/choco_S.png",
   position: {
     x: 262,
     y: 264,
