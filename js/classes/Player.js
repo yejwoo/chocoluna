@@ -31,7 +31,7 @@ class Player {
     this.img = this.animations[name].img;
   }
 
-  update() {
+  update() {    
     this.timer++;
     if (this.timer % 13 === 0) this.frame++;
     if (this.frame > 3) this.frame = 0;
@@ -39,14 +39,14 @@ class Player {
     if (this.position.y < 0) {
       this.position.y = 0;
     }
-    if (this.position.y > 227) {
-      this.position.y = 227;
+    if (this.position.y > 224) {
+      this.position.y = 224;
     }
-    if (this.position.x < -8) {
-      this.position.x = -8;
+    if (this.position.x < -6) {
+      this.position.x = -6;
     }
-    if (this.position.x > canvas.width - this.width) {
-      this.position.x = canvas.width - this.width;
+    if (this.position.x > canvas.width - this.width + 6) {
+      this.position.x = canvas.width - this.width + 6;
     }
 
     this.position.x += this.vx;
@@ -104,6 +104,8 @@ class Player {
       ) {
         if (chocos[i].id === "score") {
           score++;
+          chocos[i].getItem = true; 
+          chocos[i].getItemStartTime = performance.now();
           chocos.splice(i, 1);
           break;
         } else if (chocos[i].id === "minus") {

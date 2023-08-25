@@ -9,6 +9,7 @@ let backgroundStage,
   enemy2,
   enemy3,
   enemy4,
+  getChocoEffect,
   choco,
   chocoMinusLife,
   chocoPlusLife,
@@ -111,8 +112,21 @@ let stages = {
           x: 8,
           y: 4,
         },
+        getItem: false,
+        getItemStartTime: 0,
       })),
+      
+      getChocoEffect = new Objects ({
+        imgSrc: "img/sprite/get_choco.png",
+        position: {
+          x:8,
+          y:4,
+        },
+      })
+
         chocos.push(choco);
+
+
 
       function missile() {
         if (stageNum === 1) {
@@ -267,6 +281,17 @@ let stages = {
             y: 6,
           },
         })),
+
+        getChocoEffect = new Objects ({
+          imgSrc: "img/sprite/get_choco.png",
+          position: {
+            x:6,
+            y:6,
+          },
+        })
+  
+
+
         enemies.push(enemy1, enemy2);
       chocos.push(choco);
 
@@ -464,6 +489,14 @@ let stages = {
             y: 0,
           },
         })),
+        getChocoEffect = new Objects ({
+          imgSrc: "img/sprite/get_choco.png",
+          position: {
+            x:2,
+            y:1,
+          },
+        })
+  
         enemies.push(enemy1, enemy2, enemy3);
       chocos.push(chocoPlusLife, chocoMinusLife, choco);
 
@@ -690,6 +723,14 @@ let stages = {
             y: 4,
           },
         })),
+        getChocoEffect = new Objects ({
+          imgSrc: "img/sprite/get_choco.png",
+          position: {
+            x:4,
+            y:4,
+          },
+        })
+  
         chocos.push(chocoMinusLife, chocoPlusLife, choco);
       enemies.push(enemy1, enemy2, enemy3, enemy4);
 
@@ -868,7 +909,7 @@ let stages = {
       })),
         (enemy3 = new Enemy({
           id: 3,
-          imgSrc: "img/sprite/jump_bear.png",
+          imgSrc: "img/sprite/jump_bear2.png",
           position: {
             x: 0,
             y: 6,
@@ -881,7 +922,7 @@ let stages = {
         })),
         (enemy4 = new Enemy({
           id: 4,
-          imgSrc: "img/sprite/jump_bear2.png",
+          imgSrc: "img/sprite/jump_bear.png",
           position: {
             x: 5,
             y: 7,
@@ -917,6 +958,14 @@ let stages = {
             y: 3,
           },
         })),
+        getChocoEffect = new Objects ({
+          imgSrc: "img/sprite/get_choco.png",
+          position: {
+            x:3,
+            y:0,
+          },
+        })
+  
         chocos.push(chocoPlusLife, chocoMinusLife, choco);
       enemies.push(enemy, enemy2, enemy3, enemy4);
 

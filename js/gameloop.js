@@ -5,12 +5,12 @@ function gameOver() {
 }
 
 function drawText() {
-  c.save()
+  c.save();
   c.font = "16px Minecraft";
   c.fillStyle = "#3d200c";
   c.fillText(`STAGE  ${stageNum}`, 124, 277);
   c.fillText(`x ${score}`, 282, 277);
-  c.restore()
+  c.restore();
 }
 
 function putOverlay() {
@@ -22,23 +22,30 @@ function putOverlay() {
 }
 
 function drawBackground() {
-  c.save()
-  c.fillStyle = "white";
-  c.fillRect(0, 256, canvas.width, tile);
-  c.restore()
+  c.save();
+  c.fillStyle = "#eee";
+  c.strokeStyle = "#3d200c";
+  c.lineWidth = 4;
+  c.beginPath();
+  c.rect(0, 256, canvas.width, tile)
+  c.fill();
+  c.stroke();
+  c.restore();
   backgroundStage.draw();
 }
 
 function update() {
   chocos.forEach((choco) => {
     choco.update();
-  })
+  });
   enemies.forEach((enemy) => {
     enemy.update();
   });
   missiles.forEach((missile) => {
     missile.update();
   });
+  if (choco.getItem) getChocoEffect.update();
+
   player.update();
 }
 
@@ -46,8 +53,15 @@ function render() {
   c.clearRect(0, 0, canvas.width, canvas.height);
   drawBackground();
   chocos.forEach((choco) => choco.draw());
-  enemies.forEach((enemy) => {enemy.draw();});
-  missiles.forEach((missile) => {missile.draw();});
+  enemies.forEach((enemy) => {
+    enemy.draw();
+  });
+  missiles.forEach((missile) => {
+    missile.draw();
+  });
+
+  if (choco.getItem) getChocoEffect.draw();
+
   player.draw();
   lives.forEach((life) => {
     life.draw();
@@ -189,12 +203,12 @@ function gameEndReset() {
   GAME_OVER = false;
   gameEndScreen.classList.toggle("show");
   canvas.classList.toggle("show");
-  
+
   chocos = [];
   enemies = [];
   missiles = [];
 
-  stages[1].init()
+  stages[1].init();
   init();
 }
 
@@ -212,10 +226,9 @@ function init() {
   }
 }
 
-
 // Replay
-replayOnGameOverBtn.addEventListener("click", gameOverReset)
-replayOnGameEndBtn.addEventListener("click", gameEndReset)
+replayOnGameOverBtn.addEventListener("click", gameOverReset);
+replayOnGameEndBtn.addEventListener("click", gameEndReset);
 
 // Game init
 stages[stageNum].init();
