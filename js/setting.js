@@ -18,7 +18,7 @@ const life1 = new Status({
   imgSrc: "img/assets/life_filled.png",
   position: {
     x: 44,
-    y: 262,
+    y: 2,
   },
   status: {
     filled: {
@@ -36,7 +36,7 @@ const life2 = new Status({
   imgSrc: "img/assets/life_filled.png",
   position: {
     x: 26,
-    y: 262,
+    y: 2,
   },
   status: {
     filled: {
@@ -54,7 +54,7 @@ const life3 = new Status({
   imgSrc: "img/assets/life_filled.png",
   position: {
     x: 8,
-    y: 262,
+    y: 2,
   },
   status: {
     filled: {
@@ -74,7 +74,7 @@ const chocoScore= new Status({
   imgSrc: "img/assets/choco_S.png",
   position: {
     x: 262,
-    y: 264,
+    y: 2,
   },
 });
 
@@ -88,13 +88,3 @@ const howToScreen = document.querySelector(".how-to-play");
 const gameOverScreen = document.querySelector(".game-over");
 const gameEndScreen = document.querySelector(".game-end");
 
-// Buttons
-const startBtn = document.querySelectorAll(".title-screen button")[0];
-const howToPLAYBtn = document.querySelectorAll(".title-screen button")[1];
-const replayOnGameOverBtn = document.querySelector(".game-over button");
-const replayOnGameEndBtn = document.querySelector(".game-end button");
-const backBtn = document.querySelector(".how-to-play button");
-
-// Sound
-const soundOn = document.querySelector(".audio img:first-child");
-const soundOff = document.querySelector(".audio img:last-child");

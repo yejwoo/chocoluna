@@ -31,16 +31,16 @@ class Player {
     this.img = this.animations[name].img;
   }
 
-  update() {    
+  update() {
     this.timer++;
     if (this.timer % 13 === 0) this.frame++;
     if (this.frame > 3) this.frame = 0;
 
-    if (this.position.y < 0) {
-      this.position.y = 0;
+    if (this.position.y < 32) {
+      this.position.y = 32;
     }
-    if (this.position.y > 224) {
-      this.position.y = 224;
+    if (this.position.y > 256) {
+      this.position.y = 256;
     }
     if (this.position.x < -6) {
       this.position.x = -6;
@@ -86,7 +86,7 @@ class Player {
         missile.position.y + missile.height - 9 > this.position.y &&
         missile.position.y + 9 < this.position.y + this.height
       ) {
-        hit.play();
+        hitMissileSound.play();
         missiles.splice(i, 1);
         this.minusLife();
         this.switchSprite("damaged");
@@ -104,15 +104,18 @@ class Player {
       ) {
         if (chocos[i].id === "score") {
           score++;
-          chocos[i].getItem = true; 
+          getChocoSound.play();
+          chocos[i].getItem = true;
           chocos[i].getItemStartTime = performance.now();
           chocos.splice(i, 1);
           break;
         } else if (chocos[i].id === "minus") {
+          minusLifeSound.play();
           this.minusLife();
           chocos.splice(i, 1);
           break;
         } else if (chocos[i].id === "plus") {
+          plusLifeSound.play();
           this.plusLife();
           chocos.splice(i, 1);
           break;
@@ -125,10 +128,11 @@ class Player {
     if (
       goal.position.x - 8 <= this.position.x &&
       goal.position.x + tile >= this.position.x + 24 &&
-      goal.position.y + 16 >= this.position.y &&
+      goal.position.y + 4 >= this.position.y &&
       score === stageNum
     ) {
       if (stageNum !== 5) {
+        stageClearSound.play();
         stages[stageNum].clearStage = true;
         stageNum++;
         gsap.to(overlay, {
@@ -141,12 +145,13 @@ class Player {
           },
         });
       } else {
+        themeSong.pause();
+        endingSong.play();
+        endingSong.loop = true;
         stages[stageNum].clearStage = true;
         cancelAnimationFrame(animation);
-        themeSong.muted = true;
         gameEndScreen.classList.toggle("show");
-        canvas.classList.toggle("show")
-        // 엔딩 사운드 or song 호출
+        canvas.classList.toggle("show");
       }
     }
   }
@@ -159,7 +164,6 @@ class Player {
         lives[i].status.empty.isEmpty = true;
         lives[i].status.filled.isFilled = false;
       }
-      minus.play();
       break;
     }
     if (lives[2].status.empty.isEmpty) {
@@ -174,7 +178,6 @@ class Player {
         lives[i].swipeFilled();
         lives[i].status.empty.isEmpty = false;
         lives[i].status.filled.isFilled = true;
-        plus.play();
       }
       break;
     }

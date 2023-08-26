@@ -1,15 +1,17 @@
 function gameOver() {
   GAME_OVER = true;
+  themeSong.pause();
+  gameOverSound.play();
   gameOverScreen.classList.toggle("show");
   canvas.classList.toggle("show");
 }
 
 function drawText() {
   c.save();
-  c.font = "16px Minecraft";
-  c.fillStyle = "#3d200c";
-  c.fillText(`STAGE  ${stageNum}`, 124, 277);
-  c.fillText(`x ${score}`, 282, 277);
+  c.font = "10px pixeled";
+  c.fillStyle = "#200e02";
+  c.fillText(`STAGE  ${stageNum}`, 124, 16);
+  c.fillText(`x ${score}`, 282, 14);
   c.restore();
 }
 
@@ -19,19 +21,6 @@ function putOverlay() {
   c.fillStyle = "#160900";
   c.fillRect(0, 0, canvas.width, canvas.height);
   c.restore();
-}
-
-function drawBackground() {
-  c.save();
-  c.fillStyle = "#eee";
-  c.strokeStyle = "#3d200c";
-  c.lineWidth = 4;
-  c.beginPath();
-  c.rect(0, 256, canvas.width, tile)
-  c.fill();
-  c.stroke();
-  c.restore();
-  backgroundStage.draw();
 }
 
 function update() {
@@ -51,7 +40,7 @@ function update() {
 
 function render() {
   c.clearRect(0, 0, canvas.width, canvas.height);
-  drawBackground();
+  backgroundStage.draw();
   chocos.forEach((choco) => choco.draw());
   enemies.forEach((enemy) => {
     enemy.draw();
@@ -73,6 +62,8 @@ function render() {
 
 function gameOverReset() {
   GAME_OVER = false;
+  buttonClickSound.play();
+  themeSong.play();
   gameOverScreen.classList.toggle("show");
   canvas.classList.toggle("show");
 
@@ -91,7 +82,7 @@ function gameOverReset() {
         imgSrc: "img/sprite/choco_sprite.png",
         position: {
           x: 8,
-          y: 4,
+          y: 5,
         },
       })),
         chocos.push(choco);
@@ -102,7 +93,7 @@ function gameOverReset() {
         imgSrc: "img/sprite/choco_sprite.png",
         position: {
           x: 6,
-          y: 6,
+          y: 7,
         },
       })),
         chocos.push(choco);
@@ -113,7 +104,7 @@ function gameOverReset() {
         imgSrc: "img/sprite/choco_sprite.png",
         position: {
           x: 2,
-          y: 1,
+          y: 2,
         },
       })),
         (chocoPlusLife = new Objects({
@@ -121,7 +112,7 @@ function gameOverReset() {
           imgSrc: "img/sprite/life_plus.png",
           position: {
             x: 7,
-            y: 0,
+            y: 1,
           },
         })),
         (chocoMinusLife = new Objects({
@@ -129,7 +120,7 @@ function gameOverReset() {
           imgSrc: "img/sprite/life_minus.png",
           position: {
             x: 9,
-            y: 0,
+            y: 1,
           },
         })),
         chocos.push(choco, chocoPlusLife, chocoMinusLife);
@@ -140,7 +131,7 @@ function gameOverReset() {
         imgSrc: "img/sprite/choco_sprite.png",
         position: {
           x: 4,
-          y: 4,
+          y: 5,
         },
       })),
         (chocoMinusLife = new Objects({
@@ -148,7 +139,7 @@ function gameOverReset() {
           imgSrc: "img/sprite/life_minus.png",
           position: {
             x: 5,
-            y: 5,
+            y: 6,
           },
         })),
         (chocoPlusLife = new Objects({
@@ -156,7 +147,7 @@ function gameOverReset() {
           imgSrc: "img/sprite/life_plus.png",
           position: {
             x: 6,
-            y: 4,
+            y: 5,
           },
         })),
         chocos.push(chocoMinusLife, chocoPlusLife, choco);
@@ -167,7 +158,7 @@ function gameOverReset() {
         imgSrc: "img/sprite/choco_sprite.png",
         position: {
           x: 3,
-          y: 0,
+          y: 1,
         },
       })),
         (chocoMinusLife = new Objects({
@@ -175,7 +166,7 @@ function gameOverReset() {
           imgSrc: "img/sprite/life_minus.png",
           position: {
             x: 6,
-            y: 3,
+            y: 4,
           },
         })),
         (chocoPlusLife = new Objects({
@@ -183,7 +174,7 @@ function gameOverReset() {
           imgSrc: "img/sprite/life_plus.png",
           position: {
             x: 6,
-            y: 5,
+            y: 6,
           },
         })),
         chocos.push(chocoPlusLife, chocoMinusLife, choco);
@@ -192,6 +183,7 @@ function gameOverReset() {
 }
 
 function gameEndReset() {
+  buttonClickSound.play();
   lives.forEach((life) => {
     life.update();
   });
@@ -225,6 +217,21 @@ function init() {
     });
   }
 }
+
+// Start
+// Buttons
+const startBtn = document.querySelector(".title-screen button");
+const replayOnGameOverBtn = document.querySelector(".game-over button");
+const replayOnGameEndBtn = document.querySelector(".game-end button");
+let clickStart = false;
+startBtn.addEventListener("click", () => {
+  buttonClickSound.play();
+  themeSong.play();
+  themeSong.loop = true;
+  clickStart = true;
+  canvas.classList.toggle("show");
+  titleScreen.classList.toggle("show");
+});
 
 // Replay
 replayOnGameOverBtn.addEventListener("click", gameOverReset);

@@ -96,6 +96,7 @@ class Enemy extends Objects {
       player.position.x = player.enemyCollisionPosition[this.id].x
       player.position.y = player.enemyCollisionPosition[this.id].y
       player.switchSprite("damaged")
+      hitEnemySound.play();
 
       for (let i = 0; i < lives.length; i++) {
         if (lives[i].status.empty.isEmpty) continue;

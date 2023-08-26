@@ -1,6 +1,0 @@
-const gameStartSong = new Audio("src/sound/game-start.wav")
-const gameOverSound = new Audio("src/sound/game-over.wav")
-const themeSong = new Audio("src/sound/theme-song.wav")
-const hit = new Audio("src/sound/hit.wav")
-const plus = new Audio("src/sound/plus.wav")
-const minus = new Audio("src/sound/minus.wav")

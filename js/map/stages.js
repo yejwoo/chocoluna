@@ -22,7 +22,7 @@ let stages = {
   1: {
     playerStartPosition: {
       x: 32,
-      y: 224,
+      y: 256,
     },
     init: () => {
       score = 0;
@@ -34,7 +34,7 @@ let stages = {
       goal = {
         position: {
           x: tile * 8,
-          y: tile * 0,
+          y: tile * 1,
         },
       };
 
@@ -43,7 +43,7 @@ let stages = {
       missileCollisionBlocks = {
         position: {
           x: tile * 2,
-          y: tile * 5,
+          y: tile * 6,
         },
       };
 
@@ -51,7 +51,7 @@ let stages = {
         imgSrc: "img/sprite/idle_down.png",
         position: {
           x: tile * 1,
-          y: tile * 7,
+          y: tile * 8,
         },
         animations: {
           idleLeft: {
@@ -85,7 +85,7 @@ let stages = {
         enemyCollisionPosition: {
           1: {
             x: tile * 1,
-            y: tile * 5,
+            y: tile * 6,
           },
         },
       });
@@ -95,7 +95,7 @@ let stages = {
         imgSrc: "img/sprite/missile_bear.png",
         position: {
           x: 2,
-          y: 1,
+          y: 2,
         },
         moveDirection: {
           rotate: false,
@@ -110,23 +110,20 @@ let stages = {
         imgSrc: "img/sprite/choco_sprite.png",
         position: {
           x: 8,
-          y: 4,
+          y: 5,
         },
         getItem: false,
         getItemStartTime: 0,
       })),
-      
-      getChocoEffect = new Objects ({
-        imgSrc: "img/sprite/get_choco.png",
-        position: {
-          x:8,
-          y:4,
-        },
-      })
+        (getChocoEffect = new Objects({
+          imgSrc: "img/sprite/get_choco.png",
+          position: {
+            x: 8,
+            y: 5,
+          },
+        }));
 
-        chocos.push(choco);
-
-
+      chocos.push(choco);
 
       function missile() {
         if (stageNum === 1) {
@@ -136,7 +133,7 @@ let stages = {
               imgSrc: "img/assets/missile.png",
               position: {
                 x: tile * 2,
-                y: tile * 1 + 8,
+                y: tile * 2 + 8,
               },
               direction: "vertical",
             });
@@ -151,7 +148,7 @@ let stages = {
   2: {
     playerStartPosition: {
       x: 256,
-      y: 224,
+      y: 256,
     },
     init: () => {
       (missiles = []),
@@ -164,7 +161,7 @@ let stages = {
       goal = {
         position: {
           x: tile * 2,
-          y: tile * 0,
+          y: tile * 1,
         },
       };
 
@@ -173,7 +170,7 @@ let stages = {
       missileCollisionBlocks = {
         position: {
           x: tile * 4,
-          y: tile * 5,
+          y: tile * 7,
         },
       };
 
@@ -181,19 +178,19 @@ let stages = {
         rotate: {
           0: {
             x: tile * 7,
-            y: tile * 5,
+            y: tile * 6,
           },
           1: {
             x: tile * 5,
-            y: tile * 5,
+            y: tile * 6,
           },
           2: {
             x: tile * 5,
-            y: tile * 2,
+            y: tile * 3,
           },
           3: {
             x: tile * 7,
-            y: tile * 2,
+            y: tile * 3,
           },
         },
       };
@@ -202,7 +199,7 @@ let stages = {
         imgSrc: "img/sprite/idle_down.png",
         position: {
           x: tile * 8,
-          y: tile * 7,
+          y: tile * 8,
         },
         animations: {
           idleLeft: {
@@ -236,11 +233,11 @@ let stages = {
         enemyCollisionPosition: {
           1: {
             x: tile * 8 + 4,
-            y: tile * 4,
+            y: tile * 5,
           },
           2: {
             x: tile * 0,
-            y: tile * 4,
+            y: tile * 5 - 4,
           },
         },
       });
@@ -250,7 +247,7 @@ let stages = {
         imgSrc: "img/sprite/dance_bear.png",
         position: {
           x: 7,
-          y: 3,
+          y: 4,
         },
         moveDirection: {
           rotate: true,
@@ -264,7 +261,7 @@ let stages = {
         imgSrc: "img/sprite/missile_bear.png",
         position: {
           x: 0,
-          y: 5,
+          y: 6,
         },
         moveDirection: {
           rotate: false,
@@ -272,27 +269,23 @@ let stages = {
           horizontal: false,
         },
       })),
-
         (choco = new Objects({
           id: "score",
           imgSrc: "img/sprite/choco_sprite.png",
           position: {
             x: 6,
-            y: 6,
+            y: 7,
           },
         })),
-
-        getChocoEffect = new Objects ({
+        (getChocoEffect = new Objects({
           imgSrc: "img/sprite/get_choco.png",
           position: {
-            x:6,
-            y:6,
+            x: 6,
+            y: 7,
           },
-        })
-  
+        }));
 
-
-        enemies.push(enemy1, enemy2);
+      enemies.push(enemy1, enemy2);
       chocos.push(choco);
 
       function missile() {
@@ -303,7 +296,7 @@ let stages = {
               imgSrc: "img/assets/missile.png",
               position: {
                 x: tile * 0 + 8,
-                y: tile * 5,
+                y: tile * 6,
               },
               direction: "horizontal",
             });
@@ -318,7 +311,7 @@ let stages = {
   3: {
     playerStartPosition: {
       x: 64,
-      y: 224,
+      y: 256,
     },
     init: () => {
       (missiles = []),
@@ -331,7 +324,7 @@ let stages = {
       goal = {
         position: {
           x: tile * 4,
-          y: tile * 0,
+          y: tile * 1,
         },
       };
 
@@ -340,7 +333,7 @@ let stages = {
       missileCollisionBlocks = {
         position: {
           x: tile * 0,
-          y: tile * 4,
+          y: tile * 5,
         },
       };
 
@@ -348,29 +341,29 @@ let stages = {
         rotate: {
           0: {
             x: tile * 5,
-            y: tile * 7,
+            y: tile * 8,
           },
           1: {
             x: tile * 3,
-            y: tile * 7,
+            y: tile * 8,
           },
           2: {
             x: tile * 3,
-            y: tile * 4,
+            y: tile * 5,
           },
           3: {
             x: tile * 5,
-            y: tile * 4,
+            y: tile * 5,
           },
         },
         vertical: {
           0: {
             x: tile * 8,
-            y: tile * 0,
+            y: tile * 1,
           },
           1: {
             x: tile * 8,
-            y: tile * 8,
+            y: tile * 9,
           },
         },
       };
@@ -379,7 +372,7 @@ let stages = {
         imgSrc: "img/sprite/idle_down.png",
         position: {
           x: tile * 2,
-          y: tile * 7,
+          y: tile * 8,
         },
         animations: {
           idleLeft: {
@@ -413,15 +406,15 @@ let stages = {
         enemyCollisionPosition: {
           1: {
             x: tile * 2,
-            y: tile * 6,
+            y: tile * 7,
           },
           2: {
             x: tile * 6,
-            y: tile * 6,
+            y: tile * 7,
           },
           3: {
             x: tile * 1,
-            y: tile * 1,
+            y: tile * 2,
           },
         },
       });
@@ -431,7 +424,7 @@ let stages = {
         imgSrc: "img/sprite/dance_bear.png",
         position: {
           x: 5,
-          y: 5,
+          y: 6,
         },
         moveDirection: {
           rotate: true,
@@ -457,7 +450,7 @@ let stages = {
           imgSrc: "img/sprite/missile_bear.png",
           position: {
             x: 0,
-            y: 0,
+            y: 1,
           },
           moveDirection: {
             rotate: false,
@@ -470,7 +463,7 @@ let stages = {
         imgSrc: "img/sprite/choco_sprite.png",
         position: {
           x: 2,
-          y: 1,
+          y: 2,
         },
       })),
         (chocoPlusLife = new Objects({
@@ -478,7 +471,7 @@ let stages = {
           imgSrc: "img/sprite/life_plus.png",
           position: {
             x: 7,
-            y: 0,
+            y: 1,
           },
         })),
         (chocoMinusLife = new Objects({
@@ -486,18 +479,18 @@ let stages = {
           imgSrc: "img/sprite/life_minus.png",
           position: {
             x: 9,
-            y: 0,
+            y: 1,
           },
         })),
-        getChocoEffect = new Objects ({
+        (getChocoEffect = new Objects({
           imgSrc: "img/sprite/get_choco.png",
           position: {
-            x:2,
-            y:1,
+            x: 2,
+            y: 2,
           },
-        })
-  
-        enemies.push(enemy1, enemy2, enemy3);
+        }));
+
+      enemies.push(enemy1, enemy2, enemy3);
       chocos.push(chocoPlusLife, chocoMinusLife, choco);
 
       function missile() {
@@ -508,7 +501,7 @@ let stages = {
               imgSrc: "img/assets/missile.png",
               position: {
                 x: tile * 0,
-                y: tile * 0 + 8,
+                y: tile * 1 + 8,
               },
               direction: "vertical",
             });
@@ -523,7 +516,7 @@ let stages = {
   4: {
     playerStartPosition: {
       x: 128,
-      y: 224,
+      y: 256,
     },
     init: () => {
       (missiles = []),
@@ -536,7 +529,7 @@ let stages = {
       goal = {
         position: {
           x: tile * 9,
-          y: tile * 0,
+          y: tile * 1,
         },
       };
 
@@ -545,7 +538,7 @@ let stages = {
       missileCollisionBlocks = {
         position: {
           x: tile * 8,
-          y: tile * 6,
+          y: tile * 7,
         },
       };
 
@@ -553,39 +546,39 @@ let stages = {
         rotate: {
           0: {
             x: tile * 5,
-            y: tile * 4,
+            y: tile * 5,
           },
           1: {
             x: tile * 3,
-            y: tile * 4,
+            y: tile * 5,
           },
           2: {
             x: tile * 3,
-            y: tile * 1,
+            y: tile * 2,
           },
           3: {
             x: tile * 5,
-            y: tile * 1,
+            y: tile * 2,
           },
         },
         vertical: {
           0: {
             x: tile * 9,
-            y: tile * 0 - 32,
+            y: tile * 1 - 32,
           },
           1: {
             x: tile * 9,
-            y: tile * 8,
+            y: tile * 9,
           },
         },
         horizontal: {
           0: {
             x: tile * 1,
-            y: tile * 0,
+            y: tile * 1,
           },
           1: {
             x: tile * 7,
-            y: tile * 0,
+            y: tile * 1,
           },
         },
       };
@@ -594,7 +587,7 @@ let stages = {
         imgSrc: "img/sprite/idle_down.png",
         position: {
           x: tile * 4,
-          y: tile * 7,
+          y: tile * 8,
         },
         animations: {
           idleLeft: {
@@ -628,19 +621,19 @@ let stages = {
         enemyCollisionPosition: {
           1: {
             x: tile * 2,
-            y: tile * 5,
+            y: tile * 6,
           },
           2: {
             x: tile * 2,
-            y: tile * 1,
+            y: tile * 2,
           },
           3: {
             x: tile * 4,
-            y: tile * 1,
+            y: tile * 2,
           },
           4: {
             x: tile * 8,
-            y: tile * 3,
+            y: tile * 4,
           },
         },
       });
@@ -650,7 +643,7 @@ let stages = {
         imgSrc: "img/sprite/missile_bear.png",
         position: {
           x: 1,
-          y: 6,
+          y: 7,
         },
         moveDirection: {
           rotate: false,
@@ -664,7 +657,7 @@ let stages = {
         imgSrc: "img/sprite/jump_bear2.png",
         position: {
           x: 2,
-          y: 0,
+          y: 1,
         },
         moveDirection: {
           rotate: false,
@@ -678,7 +671,7 @@ let stages = {
         imgSrc: "img/sprite/dance_bear.png",
         position: {
           x: 5,
-          y: 2,
+          y: 3,
         },
         moveDirection: {
           rotate: true,
@@ -691,7 +684,7 @@ let stages = {
           imgSrc: "img/sprite/jump_bear.png",
           position: {
             x: 9,
-            y: 7,
+            y: 8,
           },
           moveDirection: {
             rotate: false,
@@ -704,7 +697,7 @@ let stages = {
           imgSrc: "img/sprite/choco_sprite.png",
           position: {
             x: 4,
-            y: 4,
+            y: 5,
           },
         })),
         (chocoMinusLife = new Objects({
@@ -712,7 +705,7 @@ let stages = {
           imgSrc: "img/sprite/life_minus.png",
           position: {
             x: 5,
-            y: 5,
+            y: 6,
           },
         })),
         (chocoPlusLife = new Objects({
@@ -720,18 +713,18 @@ let stages = {
           imgSrc: "img/sprite/life_plus.png",
           position: {
             x: 6,
-            y: 4,
+            y: 5,
           },
         })),
-        getChocoEffect = new Objects ({
+        (getChocoEffect = new Objects({
           imgSrc: "img/sprite/get_choco.png",
           position: {
-            x:4,
-            y:4,
+            x: 4,
+            y: 5,
           },
-        })
-  
-        chocos.push(chocoMinusLife, chocoPlusLife, choco);
+        }));
+
+      chocos.push(chocoMinusLife, chocoPlusLife, choco);
       enemies.push(enemy1, enemy2, enemy3, enemy4);
 
       let isMissileBursted = false;
@@ -745,7 +738,7 @@ let stages = {
                 imgSrc: "img/assets/missile.png",
                 position: {
                   x: tile * 1 + 8,
-                  y: tile * 6,
+                  y: tile * 7,
                 },
                 direction: "horizontal",
               });
@@ -769,7 +762,7 @@ let stages = {
     clearStage: false,
     playerStartPosition: {
       x: 288,
-      y: 224,
+      y: 256,
     },
     init: () => {
       (missiles = []),
@@ -782,7 +775,7 @@ let stages = {
       goal = {
         position: {
           x: tile * 1,
-          y: tile * 0,
+          y: tile * 1,
         },
       };
 
@@ -792,29 +785,29 @@ let stages = {
         rotate: {
           0: {
             x: tile * 3,
-            y: tile * 5,
+            y: tile * 6,
           },
           1: {
             x: tile * 0,
-            y: tile * 5,
+            y: tile * 6,
           },
           2: {
             x: tile * 0,
-            y: tile * 0,
+            y: tile * 1,
           },
           3: {
             x: tile * 3,
-            y: tile * 0,
+            y: tile * 1,
           },
         },
         horizontal: {
           0: {
             x: tile * 0 - tile,
-            y: tile * 6,
+            y: tile * 7,
           },
           1: {
             x: tile * 6,
-            y: tile * 6,
+            y: tile * 7,
           },
         },
       };
@@ -822,7 +815,7 @@ let stages = {
       missileCollisionBlocks = {
         position: {
           x: tile * 8,
-          y: tile * 8,
+          y: tile * 9,
         },
       };
 
@@ -830,7 +823,7 @@ let stages = {
         imgSrc: "img/sprite/idle_down.png",
         position: {
           x: tile * 9,
-          y: tile * 7,
+          y: tile * 8,
         },
         animations: {
           idleLeft: {
@@ -864,19 +857,19 @@ let stages = {
         enemyCollisionPosition: {
           1: {
             x: tile * 7,
-            y: tile * 2,
+            y: tile * 3,
           },
           2: {
             x: tile * 0,
-            y: tile * 5,
+            y: tile * 6,
           },
           3: {
             x: tile * 5,
-            y: tile * 6,
+            y: tile * 7,
           },
           4: {
             x: tile * 5,
-            y: tile * 7,
+            y: tile * 8,
           },
         },
       });
@@ -886,7 +879,7 @@ let stages = {
         imgSrc: "img/sprite/missile_bear.png",
         position: {
           x: 8,
-          y: 1,
+          y: 2,
         },
         moveDirection: {
           rotate: false,
@@ -899,7 +892,7 @@ let stages = {
         imgSrc: "img/sprite/dance_bear.png",
         position: {
           x: 0,
-          y: 1,
+          y: 2,
         },
         moveDirection: {
           rotate: true,
@@ -912,7 +905,7 @@ let stages = {
           imgSrc: "img/sprite/jump_bear2.png",
           position: {
             x: 0,
-            y: 6,
+            y: 7,
           },
           moveDirection: {
             rotate: false,
@@ -925,7 +918,7 @@ let stages = {
           imgSrc: "img/sprite/jump_bear.png",
           position: {
             x: 5,
-            y: 7,
+            y: 8,
           },
           moveDirection: {
             rotate: false,
@@ -939,7 +932,7 @@ let stages = {
         imgSrc: "img/sprite/choco_sprite.png",
         position: {
           x: 3,
-          y: 0,
+          y: 1,
         },
       })),
         (chocoMinusLife = new Objects({
@@ -947,7 +940,7 @@ let stages = {
           imgSrc: "img/sprite/life_minus.png",
           position: {
             x: 6,
-            y: 5,
+            y: 6,
           },
         })),
         (chocoPlusLife = new Objects({
@@ -955,18 +948,18 @@ let stages = {
           imgSrc: "img/sprite/life_plus.png",
           position: {
             x: 6,
-            y: 3,
+            y: 4,
           },
         })),
-        getChocoEffect = new Objects ({
+        (getChocoEffect = new Objects({
           imgSrc: "img/sprite/get_choco.png",
           position: {
-            x:3,
-            y:0,
+            x: 3,
+            y: 1,
           },
-        })
-  
-        chocos.push(chocoPlusLife, chocoMinusLife, choco);
+        }));
+
+      chocos.push(chocoPlusLife, chocoMinusLife, choco);
       enemies.push(enemy, enemy2, enemy3, enemy4);
 
       let isMissileBursted = false;
@@ -980,7 +973,7 @@ let stages = {
                 imgSrc: "img/assets/missile.png",
                 position: {
                   x: tile * 8,
-                  y: tile * 1 + 8,
+                  y: tile * 2 + 8,
                 },
                 direction: "vertical",
               });

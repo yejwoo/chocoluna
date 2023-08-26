@@ -8,6 +8,6 @@ class Stage {
   }
 
   draw() {
-    c.drawImage(this.img, 0, 0);
+    c.drawImage(this.img, 0, tile);
   }
 }

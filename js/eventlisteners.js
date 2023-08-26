@@ -8,7 +8,7 @@ let keys = {
 };
 
 document.addEventListener("keydown", (e) => {
-  if(clickStart) {    
+  if (clickStart) {
     keys[e.code] = true;
 
     if (keys.ArrowLeft) {
@@ -27,8 +27,7 @@ document.addEventListener("keydown", (e) => {
       player.vy = velocity;
       player.switchSprite("walkDown");
     }
-  }  
- 
+  }
 });
 
 document.addEventListener("keyup", (e) => {
@@ -54,44 +53,23 @@ document.addEventListener("keyup", (e) => {
 
 // Button click events
 
-let clickStart = false;
-startBtn.addEventListener("click", () => {
-  clickStart = true;
-  
-  canvas.classList.toggle("show");
-  titleScreen.classList.toggle("show");
-  gameStartSong.muted = true;
-  if (soundOn.style.display === "block") {
-    themeSong.play();
-    themeSong.loop = true;
-  }
+
+
+// Sound
+const soundOnBtn = document.querySelector(".audio img:first-child");
+const soundOffBtn = document.querySelector(".audio img:last-child");
+
+
+let soundOn = true;
+soundOnBtn.addEventListener("click", () => {
+  soundOn = false;
+  soundOnBtn.style.display = "none";
+  soundOffBtn.style.display = "block";
 });
 
-howToPLAYBtn.addEventListener("click", () => {
-  howToScreen.classList.toggle("show");
-  titleScreen.classList.toggle("show");
+soundOffBtn.addEventListener("click", () => {
+  soundOn = true;
+  soundOnBtn.style.display = "block";
+  soundOffBtn.style.display = "none";
+  volumeOnSound.play();
 });
-
-backBtn.addEventListener("click", () => {
-  howToScreen.classList.toggle("show");
-  titleScreen.classList.toggle("show");
-});
-
-
-// Sound events
-
-
-soundOn.addEventListener("click", () => {
-  soundOn.style.display = "none";
-  soundOff.style.display = "block";
-  gameStartSong.muted = true;
-});
-
-soundOff.addEventListener("click", () => {
-  soundOff.style.display = "none";
-  soundOn.style.display = "block";
-  gameStartSong.play();
-  gameStartSong.muted = false;
-  gameStartSong.loop = true;
-});
-
