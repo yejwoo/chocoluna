@@ -63,7 +63,11 @@ function render() {
 function gameOverReset() {
   GAME_OVER = false;
   buttonClickSound.play();
-  themeSong.play();
+
+  if (soundOn) {
+    themeSong.currentTime = 0;
+    themeSong.play();
+  }
   gameOverScreen.classList.toggle("show");
   canvas.classList.toggle("show");
 
@@ -184,6 +188,13 @@ function gameOverReset() {
 
 function gameEndReset() {
   buttonClickSound.play();
+
+  if (soundOn) {
+    themeSong.currentTime = 0;
+    themeSong.play();
+  }
+  endingSound.pause();
+
   lives.forEach((life) => {
     life.update();
   });
@@ -218,19 +229,26 @@ function init() {
   }
 }
 
-// Start
+
+
 // Buttons
 const startBtn = document.querySelector(".title-screen button");
 const replayOnGameOverBtn = document.querySelector(".game-over button");
 const replayOnGameEndBtn = document.querySelector(".game-end button");
 let clickStart = false;
+
+// Game start
 startBtn.addEventListener("click", () => {
-  buttonClickSound.play();
-  themeSong.play();
-  themeSong.loop = true;
   clickStart = true;
+  buttonClickSound.play();
   canvas.classList.toggle("show");
   titleScreen.classList.toggle("show");
+
+  // themeSong start
+  if (soundOn) {
+    themeSong.play();
+    themeSong.loop = true;
+  }
 });
 
 // Replay

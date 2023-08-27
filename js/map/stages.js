@@ -16,7 +16,77 @@ let backgroundStage,
   missile,
   missileCollisionBlocks,
   collisionBlocks,
-  playerStartPosition;
+  playerStartPosition,
+  missileInterval
+
+
+function startMissiles() {
+  if (missileInterval) {
+    clearInterval(missileInterval);
+  }
+
+  missileInterval = setInterval(
+    () => {
+      if (stageNum === 1) {
+        const missile = new Missile({
+          imgSrc: "img/assets/missile.png",
+          position: {
+            x: tile * 2,
+            y: tile * 2 + 8,
+          },
+          direction: "vertical",
+        });
+        missiles.push(missile);
+      } else if (stageNum === 2) {
+        const missile = new Missile({
+          imgSrc: "img/assets/missile.png",
+          position: {
+            x: tile * 0 + 8,
+            y: tile * 6,
+          },
+          direction: "horizontal",
+        });
+        missiles.push(missile);
+      } else if (stageNum === 3) {
+        const missile = new Missile({
+          imgSrc: "img/assets/missile.png",
+          position: {
+            x: tile * 0,
+            y: tile * 1 + 8,
+          },
+          direction: "vertical",
+        });
+        missiles.push(missile);
+      } else if (stageNum === 4) {
+        const missile = new Missile({
+          imgSrc: "img/assets/missile.png",
+          position: {
+            x: tile * 1 + 8,
+            y: tile * 7,
+          },
+          direction: "horizontal",
+        });
+        missiles.push(missile);
+      } else {
+        const missile = new Missile({
+          imgSrc: "img/assets/missile.png",
+          position: {
+            x: tile * 8,
+            y: tile * 2 + 8,
+          },
+          direction: "vertical",
+        });
+        missiles.push(missile);
+      }
+    },
+    stageNum === 3 ? 3500 : stageNum === 4 ? 2500 : stageNum === 5 ? 2500 : 1500
+  );
+}
+
+function stopMissiles() {
+  clearInterval(missileInterval);
+  missileInterval = null;
+}
 
 let stages = {
   1: {
@@ -124,25 +194,7 @@ let stages = {
         }));
 
       chocos.push(choco);
-
-      function missile() {
-        if (stageNum === 1) {
-          requestAnimationFrame(missile);
-          if (timer % 90 === 0) {
-            const missile = new Missile({
-              imgSrc: "img/assets/missile.png",
-              position: {
-                x: tile * 2,
-                y: tile * 2 + 8,
-              },
-              direction: "vertical",
-            });
-            missiles.push(missile);
-          } else cancelAnimationFrame(missile);
-        }
-      }
-
-      missile();
+      startMissiles();
     },
   },
   2: {
@@ -151,8 +203,7 @@ let stages = {
       y: 256,
     },
     init: () => {
-      (missiles = []),
-        (enemies = []),
+      (enemies = []),
         (chocos = []),
         (backgroundStage = new Stage({
           imgSrc: "img/map/stage2.png",
@@ -287,25 +338,8 @@ let stages = {
 
       enemies.push(enemy1, enemy2);
       chocos.push(choco);
-
-      function missile() {
-        if (stageNum === 2) {
-          requestAnimationFrame(missile);
-          if (timer % 90 === 0) {
-            const missile = new Missile({
-              imgSrc: "img/assets/missile.png",
-              position: {
-                x: tile * 0 + 8,
-                y: tile * 6,
-              },
-              direction: "horizontal",
-            });
-            missiles.push(missile);
-          } else cancelAnimationFrame(missile);
-        }
-      }
-
-      missile();
+      stopMissiles();
+      startMissiles();
     },
   },
   3: {
@@ -492,25 +526,8 @@ let stages = {
 
       enemies.push(enemy1, enemy2, enemy3);
       chocos.push(chocoPlusLife, chocoMinusLife, choco);
-
-      function missile() {
-        if (stageNum === 3) {
-          requestAnimationFrame(missile);
-          if (timer % 200 === 0) {
-            const missile = new Missile({
-              imgSrc: "img/assets/missile.png",
-              position: {
-                x: tile * 0,
-                y: tile * 1 + 8,
-              },
-              direction: "vertical",
-            });
-            missiles.push(missile);
-          } else cancelAnimationFrame(missile);
-        }
-      }
-
-      missile();
+      stopMissiles();
+      startMissiles();
     },
   },
   4: {
@@ -727,35 +744,8 @@ let stages = {
       chocos.push(chocoMinusLife, chocoPlusLife, choco);
       enemies.push(enemy1, enemy2, enemy3, enemy4);
 
-      let isMissileBursted = false;
-
-      function missile() {
-        if (stageNum === 4) {
-          requestAnimationFrame(missile);
-          if (isMissileBursted) {
-            if (timer % 10 === 0) {
-              const missile = new Missile({
-                imgSrc: "img/assets/missile.png",
-                position: {
-                  x: tile * 1 + 8,
-                  y: tile * 7,
-                },
-                direction: "horizontal",
-              });
-              missiles.push(missile);
-            }
-          } else {
-            setTimeout(() => {
-              isMissileBursted = true;
-              setTimeout(() => {
-                isMissileBursted = false;
-              }, 3000);
-            }, 3000);
-          }
-        }
-      }
-
-      missile();
+      stopMissiles();
+      startMissiles();
     },
   },
   5: {
@@ -962,35 +952,8 @@ let stages = {
       chocos.push(chocoPlusLife, chocoMinusLife, choco);
       enemies.push(enemy, enemy2, enemy3, enemy4);
 
-      let isMissileBursted = false;
-
-      function missile() {
-        if (stageNum === 5) {
-          requestAnimationFrame(missile);
-          if (isMissileBursted) {
-            if (timer % 10 === 0) {
-              const missile = new Missile({
-                imgSrc: "img/assets/missile.png",
-                position: {
-                  x: tile * 8,
-                  y: tile * 2 + 8,
-                },
-                direction: "vertical",
-              });
-              missiles.push(missile);
-            }
-          } else {
-            setTimeout(() => {
-              isMissileBursted = true;
-              setTimeout(() => {
-                isMissileBursted = false;
-              }, 3000);
-            }, 3000);
-          }
-        }
-      }
-
-      missile();
+      stopMissiles();
+      startMissiles();
     },
   },
 };

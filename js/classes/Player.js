@@ -146,8 +146,8 @@ class Player {
         });
       } else {
         themeSong.pause();
-        endingSong.play();
-        endingSong.loop = true;
+
+        if (soundOn) endingSound.play();
         stages[stageNum].clearStage = true;
         cancelAnimationFrame(animation);
         gameEndScreen.classList.toggle("show");

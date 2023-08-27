@@ -62,14 +62,21 @@ const soundOffBtn = document.querySelector(".audio img:last-child");
 
 let soundOn = true;
 soundOnBtn.addEventListener("click", () => {
+  // Turn off the sound effects and song
   soundOn = false;
   soundOnBtn.style.display = "none";
   soundOffBtn.style.display = "block";
+
+  // themeSong off
+  themeSong.pause();
+  themeSong.loop = false;
 });
 
 soundOffBtn.addEventListener("click", () => {
+  // Turn on the sound effects and song
   soundOn = true;
   soundOnBtn.style.display = "block";
   soundOffBtn.style.display = "none";
   volumeOnSound.play();
+  themeSong.currentTime = 0;
 });
