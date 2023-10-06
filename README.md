@@ -1,4 +1,4 @@
-# <img src="https://i.ibb.co/dPTZPDP/choco-L.png" alt="choco-L" border="0"> Chocoluna - JavaScript Game
+# <img src="https://i.ibb.co/dPTZPDP/choco-L.png" alt="choco-L" border="0"> ChocoLuna - JavaScript Game
 <img src="https://i.ibb.co/0CKkZ6V/title-screen.png" alt="title-screen" border="0">
 
 ## 0. 목차
