@@ -3,7 +3,7 @@
 
 ## 0. 목차
 [1. 개요](##1.-개요)  
-[2. 시연 주소](##2.-시연-주소)  
+[2. 시연](##2.-시연)  
 [3. 구현 기능](##3.-구현-기능)  
 [4. 사용 기술](##4.-사용-기술)
 
@@ -15,8 +15,13 @@
 - 화살표 키를 누르면 플레이어가 이동하며, 적을 피해 초콜릿 5개를 먹으면 게임이 끝납니다.
 
 
-## 2. 시연 주소
-https://yejwoo.github.io/chocoluna
+
+## 2. 시연
+
+<a href="https://yejwoo.github.io/chocoluna" target="_blank"><img src="https://i.ibb.co/Ns0Sv4r/btn.png" alt="btn" width="300"></a>  
+
+
+**Click the button!**
 
 
 ## 3. 구현 기능
@@ -37,6 +42,7 @@ https://yejwoo.github.io/chocoluna
 **기획 & 디자인**
 
 <img src="https://img.shields.io/badge/Figma-0A222E?style=for-the-badge&logo=Figma&logoColor=white"/> <img src="https://img.shields.io/badge/Aseprite-7D929E?style=for-the-badge&logo=Aseprite&logoColor=white"/>
+
 
 
 
