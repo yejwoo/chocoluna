@@ -1,53 +1,35 @@
-// Keyboard events
-
-let keys = {
-  ArrowLeft: false,
-  ArrowRight: false,
-  ArrowUp: false,
-  ArrowDown: false,
+const MOVEMENT_MAPS = {
+  KeyA: { velocity: [-1, 0], sprites: { move: 'walkLeft', idle: 'idleLeft' } },
+  KeyD: { velocity: [1, 0], sprites: { move: 'walkRight', idle: 'idleRight' } },
+  KeyW: { velocity: [0, -1], sprites: { move: 'walkUp', idle: 'idleUp' } },
+  KeyS: { velocity: [0, 1], sprites: { move: 'walkDown', idle: 'idleDown' } }
 };
 
-document.addEventListener("keydown", (e) => {
-  if (clickStart) {
-    keys[e.code] = true;
+let keys = Object.fromEntries(Object.keys(MOVEMENT_MAPS).map(key => [key, false]));
 
-    if (keys.ArrowLeft) {
-      player.vx = -velocity;
-      player.switchSprite("walkLeft");
-    }
-    if (keys.ArrowRight) {
-      player.vx = velocity;
-      player.switchSprite("walkRight");
-    }
-    if (keys.ArrowUp) {
-      player.vy = -velocity;
-      player.switchSprite("walkUp");
-    }
-    if (keys.ArrowDown) {
-      player.vy = velocity;
-      player.switchSprite("walkDown");
-    }
+document.addEventListener("keydown", (e) => {
+  if (clickStart && MOVEMENT_MAPS[e.code]) {
+    keys[e.code] = true;
+    const { velocity: [x, y], sprites: { move } } = MOVEMENT_MAPS[e.code];
+    player.vx = x * velocity;
+    player.vy = y * velocity;
+    player.switchSprite(move);
   }
 });
 
 document.addEventListener("keyup", (e) => {
-  keys[e.code] = false;
-
-  if (!keys.ArrowLeft && player.vx < 0) {
-    player.vx = 0;
-    player.switchSprite("idleLeft");
-  }
-  if (!keys.ArrowRight && player.vx > 0) {
-    player.vx = 0;
-    player.switchSprite("idleRight");
-  }
-  if (!keys.ArrowUp && player.vy < 0) {
-    player.vy = 0;
-    player.switchSprite("idleUp");
-  }
-  if (!keys.ArrowDown && player.vy > 0) {
-    player.vy = 0;
-    player.switchSprite("idleDown");
+  if (MOVEMENT_MAPS[e.code]) {
+    keys[e.code] = false;
+    const { velocity: [x, y], sprites: { idle } } = MOVEMENT_MAPS[e.code];
+    
+    if ((!keys.KeyA && player.vx < 0) || (!keys.KeyD && player.vx > 0)) {
+      player.vx = 0;
+      player.switchSprite(idle);
+    }
+    if ((!keys.KeyW && player.vy < 0) || (!keys.KeyS && player.vy > 0)) {
+      player.vy = 0;
+      player.switchSprite(idle);
+    }
   }
 });
 
